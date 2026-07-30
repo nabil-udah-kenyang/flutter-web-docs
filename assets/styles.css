@@ -1,0 +1,120 @@
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+::selection {
+  background: rgba(34, 211, 238, .28);
+  color: #ecfeff;
+}
+
+.docs-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, .35) transparent;
+}
+
+.docs-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.docs-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, .45);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+
+.docs-code {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.lesson-card {
+  border: 1px solid rgba(255, 255, 255, .1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .028)),
+    #0b1020;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .24);
+}
+
+.module-link.active {
+  border-color: rgba(34, 211, 238, .4);
+  background: rgba(34, 211, 238, .1);
+  color: #a5f3fc;
+}
+
+.module-link.active span:first-child {
+  background: rgba(34, 211, 238, .18);
+  color: #67e8f9;
+}
+
+.toc-link.active,
+.toc-link:hover {
+  color: #67e8f9;
+  border-color: #22d3ee;
+}
+
+.code-tab.active {
+  border-color: rgba(34, 211, 238, .45);
+  background: rgba(34, 211, 238, .11);
+  color: #a5f3fc;
+}
+
+.source-panel[hidden] {
+  display: none;
+}
+
+pre[class*="language-"] {
+  margin: 0;
+  background: #050816;
+  text-shadow: none;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: .875rem;
+  line-height: 1.8;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #64748b;
+}
+
+.token.keyword {
+  color: #c084fc;
+}
+
+.token.string {
+  color: #fde68a;
+}
+
+.token.function,
+.token.class-name {
+  color: #67e8f9;
+}
+
+.token.number,
+.token.boolean {
+  color: #86efac;
+}
+
+.token.operator,
+.token.punctuation {
+  color: #cbd5e1;
+}
+
+.line-soft {
+  background: linear-gradient(90deg, rgba(34, 211, 238, .16), transparent);
+  border-left: 2px solid rgba(34, 211, 238, .75);
+}
