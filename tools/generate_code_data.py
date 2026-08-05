@@ -114,8 +114,26 @@ def should_include(file: Path, module: Path) -> bool:
     )
 
 
+def file_sort_key(file: Path, module: Path) -> tuple[int, str]:
+    relative = file.relative_to(module).as_posix()
+    if module.name == "00_belajar_dart":
+        order = {
+            "section1.dart": 1,
+            "section2.dart": 2,
+            "section3.dart": 3,
+            "section4.dart": 4,
+            "section5.dart": 5,
+            "nullable.dart": 6,
+            "class.dart": 7,
+        }
+        return (order.get(relative, 99), relative)
+
+    return (0, relative)
+
+
 def important_files(module: Path) -> list[Path]:
-    return sorted(file for file in module.rglob("*") if file.is_file() and should_include(file, module))
+    files = (file for file in module.rglob("*") if file.is_file() and should_include(file, module))
+    return sorted(files, key=lambda file: file_sort_key(file, module))
 
 
 def parse_packages(pubspec: Path) -> list[dict[str, str]]:

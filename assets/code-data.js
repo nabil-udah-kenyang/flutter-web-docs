@@ -1,18 +1,6 @@
 window.CODE_SNAPSHOTS = {
   "00_belajar_dart": [
     {
-      "path": "class.dart",
-      "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "class pakaian {\n  // Atribut\n  String? jenis;\n  String? warna;\n\n  // //-> Ini adalah constructor di dart\n  // pakaian(String jenisNya, String warnaNya) {\n  //   jenis = jenisNya;\n  //   warna = warnaNya;\n  // }\n\n  // direct named constructor\n  pakaian({this.jenis, this.warna});\n}\n\nvoid main() {\n  var pakaian1 = pakaian(\n    jenis: \"baju\",\n    warna: \"merah\",\n  ); //ini cara memanggil constructor\n\n  // var pakaian2 = pakaian(); //ini adalah cara dasar membuat object dari class pakaian\n  // pakaian2.jenis = \"celana\";\n  // pakaian2.warna = \"hitam\";\n\n  print(\n    \"Ini adalah  ${pakaian1.jenis} dan dia berwarna : ${pakaian1.warna}\",\n  ); //yang di print merupakan variabel dari object yang udah di inisiasi\n\n  // print(\"Ini adalah  ${pakaian2.jenis} dan dia berwarna : ${pakaian2.warna}\");\n}\n"
-    },
-    {
-      "path": "nullable.dart",
-      "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "void main() {\n  //null safety -> fitur canggih untuk mengetahui adanya error akibat null\n  //  jenis syntax baru : ? !\n\n  // kesimpulan\n  // 1. ? -> variable diperbolehkan null\n  // 2. ?? -> untuk handle null\n  // 3. ! -> diwajibkan untuk ada value alias haram untuk kosong(null ). data sudah dipastikan harus ada, jika tidak ada maka akan crash\n\n  String? nama;\n\n  print(nama?.length);\n}\n"
-    },
-    {
       "path": "section1.dart",
       "language": "dart",
       "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
@@ -41,6 +29,18 @@ window.CODE_SNAPSHOTS = {
       "language": "dart",
       "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
       "source": "void main() {\n  var nama = \"nabil\";\n\n  if (nama == \"nabil\") {\n    print(\"benar\");\n  } else {\n    print(\"ga kelas\");\n  }\n}\n"
+    },
+    {
+      "path": "nullable.dart",
+      "language": "dart",
+      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
+      "source": "void main() {\n  //null safety -> fitur canggih untuk mengetahui adanya error akibat null\n  //  jenis syntax baru : ? !\n\n  // kesimpulan\n  // 1. ? -> variable diperbolehkan null\n  // 2. ?? -> untuk handle null\n  // 3. ! -> diwajibkan untuk ada value alias haram untuk kosong(null ). data sudah dipastikan harus ada, jika tidak ada maka akan crash\n\n  String? nama;\n\n  print(nama?.length);\n}\n"
+    },
+    {
+      "path": "class.dart",
+      "language": "dart",
+      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
+      "source": "class pakaian {\n  // Atribut\n  String? jenis;\n  String? warna;\n\n  // //-> Ini adalah constructor di dart\n  // pakaian(String jenisNya, String warnaNya) {\n  //   jenis = jenisNya;\n  //   warna = warnaNya;\n  // }\n\n  // direct named constructor\n  pakaian({this.jenis, this.warna});\n}\n\nvoid main() {\n  var pakaian1 = pakaian(\n    jenis: \"baju\",\n    warna: \"merah\",\n  ); //ini cara memanggil constructor\n\n  // var pakaian2 = pakaian(); //ini adalah cara dasar membuat object dari class pakaian\n  // pakaian2.jenis = \"celana\";\n  // pakaian2.warna = \"hitam\";\n\n  print(\n    \"Ini adalah  ${pakaian1.jenis} dan dia berwarna : ${pakaian1.warna}\",\n  ); //yang di print merupakan variabel dari object yang udah di inisiasi\n\n  // print(\"Ini adalah  ${pakaian2.jenis} dan dia berwarna : ${pakaian2.warna}\");\n}\n"
     }
   ],
   "01_widget_sederhana": [

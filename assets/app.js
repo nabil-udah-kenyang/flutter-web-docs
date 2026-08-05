@@ -36,6 +36,101 @@ void main() {
     run: "dart class.dart"
   },
   {
+    id: "00A",
+    slug: "introduction-flutter-basic-syntax",
+    title: "Introduction Flutter: Basic Syntax",
+    track: "Flutter Basic",
+    folder: "00_introduction_flutter",
+    level: "Beginner",
+    goal: "Membaca kode Flutter paling dasar dengan lebih santai sebelum mulai membuat widget sederhana.",
+    files: ["intro/basic_syntax.dart", "intro/widget_tree.dart"],
+    learn: [
+      "Memahami bahwa Flutter membuat tampilan dari susunan widget, bukan dari HTML dan CSS.",
+      "Mengenal alur `main`, `runApp`, `MaterialApp`, `Scaffold`, `AppBar`, `body`, dan `child`.",
+      "Membaca tanda syntax penting seperti kurung `()`, kurung kurawal `{}`, titik koma `;`, koma `,`, dan named parameter.",
+      "Membedakan class, object, constructor, method `build`, property, dan callback function.",
+      "Memahami fungsi `BuildContext`, `StatelessWidget`, `StatefulWidget`, `setState`, dan `const` secara beginner-friendly.",
+      "Melihat cara komentar, import package, nesting widget, dan format kode yang rapi."
+    ],
+    detail: "Sebelum masuk ke folder widget sederhana, bagian ini adalah peta awal supaya orang awam tidak langsung kaget melihat banyak kurung dan nama widget. Flutter memakai bahasa Dart, jadi bentuk kodenya mirip menyusun object: ada nama widget, lalu di dalamnya ada property seperti `home`, `appBar`, `body`, `child`, atau `children`. Cara bacanya bisa dari luar ke dalam: aplikasi dimulai dari `main`, lalu `runApp` menjalankan widget utama, kemudian `MaterialApp` menyiapkan gaya aplikasi, `Scaffold` membuat kerangka halaman, dan isi layar ditempatkan di `body`. Kalau sudah paham pola ini, materi widget sederhana akan terasa jauh lebih masuk akal karena kamu tidak cuma menyalin kode, tapi tahu tiap bagian sedang bekerja untuk apa.",
+    concept: ["main function", "runApp", "Widget tree", "Named parameter", "child dan children", "Build method", "BuildContext", "const", "Callback", "setState"],
+    snippet: `import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Belajar Flutter'),
+          backgroundColor: Colors.green,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Halo, pemula Flutter!',
+                style: TextStyle(fontSize: 22),
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton(
+                onPressed: () {
+                  print('Tombol ditekan');
+                },
+                child: const Text('Klik aku'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}`,
+    explanation: [
+      "`import 'package:flutter/material.dart';` mengambil library Material Design. Tanpa import ini, widget seperti `MaterialApp`, `Scaffold`, `Text`, `Column`, dan `ElevatedButton` tidak dikenali.",
+      "`void main()` adalah function pertama yang dijalankan saat aplikasi dibuka. Hampir semua project Dart dan Flutter punya titik mulai bernama `main`.",
+      "`runApp(const MyApp())` memberi tahu Flutter widget apa yang menjadi akar aplikasi. Bayangkan ini seperti menaruh halaman pertama ke layar.",
+      "`class MyApp extends StatelessWidget` berarti kita membuat widget sendiri bernama `MyApp`. `StatelessWidget` cocok untuk tampilan yang tidak menyimpan perubahan data lokal.",
+      "`const MyApp({super.key});` adalah constructor. Untuk pemula, cukup pahami bahwa constructor adalah pintu untuk membuat object/widget. `super.key` membantu Flutter mengenali widget saat rebuild.",
+      "`@override` artinya method di bawahnya mengganti method bawaan dari parent class. Di Flutter, method `build` wajib ada pada widget karena dari sinilah tampilan dikembalikan.",
+      "`Widget build(BuildContext context)` adalah function yang menghasilkan tampilan. `BuildContext` membawa informasi posisi widget di widget tree, misalnya untuk theme, navigation, dialog, snackbar, dan ukuran layar.",
+      "`return MaterialApp(...)` berarti hasil dari `build` adalah widget `MaterialApp`. Di dalam tanda kurung, kita mengisi property menggunakan named parameter seperti `home:`, `title:`, `body:`, dan `child:`.",
+      "`MaterialApp` adalah pembungkus aplikasi Material. Biasanya dipakai untuk konfigurasi global seperti theme, route, title, dan banner debug.",
+      "`Scaffold` adalah kerangka halaman. Di sinilah kita biasa memasang `appBar`, `body`, `drawer`, `floatingActionButton`, dan `bottomNavigationBar`.",
+      "`AppBar` adalah bagian header atas aplikasi. `title` menerima widget, jadi kita isi dengan `Text('Belajar Flutter')`.",
+      "`body` adalah area utama layar. Pada contoh ini, `body` diisi `Center`, lalu `Center` punya satu `child`, yaitu `Column`.",
+      "`child` dipakai kalau widget hanya menerima satu anak. Contohnya `Center(child: ...)`, `Container(child: ...)`, dan `Padding(child: ...)`.",
+      "`children` dipakai kalau widget menerima banyak anak dalam bentuk list. Contohnya `Column(children: [...])`, `Row(children: [...])`, dan `Stack(children: [...])`.",
+      "`Column` menyusun widget dari atas ke bawah. Kalau ingin menyamping, biasanya memakai `Row`.",
+      "`mainAxisAlignment: MainAxisAlignment.center` mengatur posisi anak-anak `Column` pada sumbu utama. Karena `Column` arahnya vertikal, berarti ini menaruh isi ke tengah secara vertikal.",
+      "`Text` menampilkan tulisan. Styling tulisan diatur lewat `TextStyle`, misalnya `fontSize`, `fontWeight`, `color`, dan `fontStyle`.",
+      "`SizedBox(height: 12)` sering dipakai untuk memberi jarak kosong. Ini lebih rapi daripada memberi margin asal-asalan di banyak tempat.",
+      "`ElevatedButton` adalah tombol. Property `child` menentukan isi tombol, sedangkan `onPressed` menentukan aksi saat tombol ditekan.",
+      "`onPressed: () { ... }` adalah callback function. Artinya function kecil ini tidak langsung jalan saat halaman dibuat, tapi disimpan dulu dan baru dijalankan ketika user menekan tombol.",
+      "`print('Tombol ditekan')` mencetak teks ke debug console. Untuk latihan awal, ini berguna untuk membuktikan bahwa sebuah function benar-benar terpanggil.",
+      "`const` dipakai untuk widget atau nilai yang tidak berubah. Memakai `const` membantu Flutter bekerja lebih efisien dan membuat niat kode lebih jelas.",
+      "Titik koma `;` menutup statement. Koma `,` memisahkan parameter atau item list. Kurung `()` dipakai untuk memanggil function/constructor. Kurung `{}` dipakai untuk body function/class. Kurung `[]` dipakai untuk list seperti `children`.",
+      "Indentasi atau jarak menjorok tidak mengubah logic, tapi sangat membantu membaca widget tree. Setiap widget yang masuk ke dalam widget lain sebaiknya dibuat lebih menjorok."
+    ],
+    exercise: [
+      "Baca snippet dari `main` sampai `Text('Klik aku')`, lalu tulis ulang dengan komentar fungsi tiap bagian.",
+      "Ganti text, warna AppBar, dan ukuran font supaya terasa bahwa property mengubah tampilan.",
+      "Tambahkan satu `Text` lagi di dalam `children` dan beri jarak dengan `SizedBox`.",
+      "Ubah `Column` menjadi `Row`, lalu amati kenapa susunan widget berubah dari vertikal ke horizontal.",
+      "Buat tombol kedua dengan `onPressed` yang mencetak pesan berbeda.",
+      "Hapus satu koma atau titik koma dengan sengaja, baca error-nya, lalu kembalikan lagi agar terbiasa memahami pesan error."
+    ],
+    run: "flutter create intro_flutter\ncd intro_flutter\nflutter run"
+  },
+  {
     id: "01",
     slug: "widget-sederhana",
     title: "Widget Sederhana",
