@@ -1,46 +1,58 @@
 window.CODE_SNAPSHOTS = {
   "00_belajar_dart": [
     {
-      "path": "section1.dart",
+      "path": "01_variable_list.dart",
       "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "void main() {\n  var nama = \"Nabil\";\n\n  //Tipe Data List (mirip array tapi bisa di isi campur tipe data apabila di deklarasikan dengan var)\n  var umur = [20, 21, 22, 23, 24];\n  var kelompok = [\"Nabil\", \"Dimas\", \"Rizky\", \"Fajar\", \"Rizal\"];\n  var campuran = [\"nabil\", 23, 2.3];\n\n  // string interpolation(menggabungkan dengan string dengan variabel)\n  print(\"Hallo nama saya $nama\");\n\n  // cara menamilkan data pada list\n  print(\"Umur saya ${umur[3]}\");\n}\n"
+      "purpose": "Variabel & Interpolasi String: cara deklarasi variabel dan akses elemen List dasar di Dart.",
+      "source": "void main() {\n  var nama = \"Nabil\";\n\n  // Tipe Data List (bisa berisi berbagai tipe data jika di-deklarasi dengan var)\n  var umur = [20, 21, 22, 23, 24];\n  var kelompok = [\"Nabil\", \"Dimas\", \"Rizky\", \"Fajar\", \"Rizal\"];\n  var campuran = [\"Nabil\", 23, 2.3];\n\n  // String Interpolation (menggabungkan teks dengan variabel)\n  print(\"Halo nama saya $nama\");\n\n  // Menampilkan data elemen spesifik pada List berdasarkan index (mulai dari 0)\n  print(\"Umur saya ${umur[3]}\");\n}\n"
     },
     {
-      "path": "section2.dart",
+      "path": "02_tipe_data.dart",
       "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "// ============== TIPE DATA DART ============\n\nvoid main() {\n  // string\n  String nama = 'Nabil';\n  // integer\n  int angka = 3;\n  // NUM\n  num number = 3.3; // bisa digunakan untuk bilangan bulat ataupun desimal\n  //boolean\n  final bool benar = false;\n  //double(desimal)\n  double pecahan = 0.5;\n  //list (jika tidak di definisikan spesifik tipe data nya maka bisa dicampur berbagai nilai string ataupun bilangan)\n  List anggota = ['nabil', 'kluivert', 'jojo'];\n  // map (Mirip seperti array assoc, ada key ada value)\n  Map kendaraan = {'merk': 'toyota', 'tipe': 'avanza', 'tahun': 2003};\n\n  //final atau constant, mirip di javascript gabisa diubah datanya\n  benar = true;\n\n  //bebrapa function manipulation string\n  print(nama.toLowerCase()); //full huruf kecil\n  print(nama.toUpperCase()); //full huruf gede\n  print(\n    nama.substring(1, 5),\n  ); //memotong atau menhilangan huruf dalam string sesuai dengan start  dan end\n\n  print(anggota[2]);\n  print(kendaraan['merk']);\n}\n"
+      "purpose": "Tipe Data Dart: String, int, double, num, bool, List, Map, serta fungsi manipulasi String.",
+      "source": "// ============== TIPE DATA UTAMA DART ============\n\nvoid main() {\n  String nama = 'Nabil';\n  int angka = 3;\n  num number = 3.3; // Num bisa berisi bilangan bulat (int) maupun desimal (double)\n  bool benar = true;\n  double pecahan = 0.5;\n\n  // List (Daftar item berurutan)\n  List anggota = ['Nabil', 'Kluivert', 'Jojo'];\n\n  // Map (Pasangan Key - Value)\n  Map kendaraan = {'merk': 'Toyota', 'tipe': 'Avanza', 'tahun': 2003};\n\n  // Manipulasi String bawaan Dart\n  print(nama.toLowerCase()); // Mengubah ke huruf kecil\n  print(nama.toUpperCase()); // Mengubah ke huruf kapital\n  print(nama.substring(0, 3)); // Memotong String (index start, index end)\n\n  print(anggota[2]); // Membaca elemen List index ke-2\n  print(kendaraan['merk']); // Membaca nilai dari Map menggunakan Key\n}\n"
     },
     {
-      "path": "section3.dart",
+      "path": "03_function.dart",
       "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "// membuat function di dart bisa di dalam main function maupun diluar\nvoid sum(var a, b) {\n  print(a + b);\n}\n\nint minus(var angka1, angka2) {\n  return angka1 - angka2;\n}\n\nvoid main() {\n  sum(3, 5);\n}\n"
+      "purpose": "Fungsi (Functions): cara membuat void function, return value, dan named parameters di Dart.",
+      "source": "// Function tanpa nilai kembalian (void)\nvoid sapaUser(String nama) {\n  print(\"Selamat datang, $nama!\");\n}\n\n// Function dengan nilai kembalian (return int)\nint tambah(int a, int b) {\n  return a + b;\n}\n\n// Function dengan Named Parameters ({ })\nvoid cetakProfil({required String nama, int umur = 17}) {\n  print(\"Profil: $nama, Umur: $umur tahun\");\n}\n\nvoid main() {\n  sapaUser(\"Nabil\");\n  int hasil = tambah(10, 5);\n  print(\"Hasil penjumlahan: $hasil\");\n\n  // Memanggil function dengan named parameters\n  cetakProfil(nama: \"Naufal Nabil\", umur: 20);\n}\n"
     },
     {
-      "path": "section4.dart",
+      "path": "04_looping.dart",
       "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "void main() {\n  // for loop\n  // for (var i = 10; i >= 1; i--) {\n  //   print(i);\n  // }\n\n  var handphone = [\"xiaomi\", \"samsung\", \"iphone\"];\n  for (var i = 0; i < handphone.length; i++) {\n    print(handphone[i]);\n  }\n\n  //atau bisa menggunakan for in\n  for (var hp in handphone) {\n    print(\"handphone : $hp\");\n  }\n  // while\n  // var b = 1;\n  // while (b <= 10) {\n  //   print(b);\n  //   b++;\n  // }\n\n  // do while\n  // int a = 1;\n  // do {\n  //   print(a);\n  //   a++;\n  // } while (a < 11);\n}\n"
+      "purpose": "Perulangan (Looping): penggunaan for loop, for-in, while, dan do-while di Dart.",
+      "source": "void main() {\n  // 1. Standar For Loop\n  print(\"--- Standar For Loop ---\");\n  for (var i = 1; i <= 3; i++) {\n    print(\"Iterasi ke-$i\");\n  }\n\n  // 2. For-In Loop (Sangat sering dipakai untuk List)\n  print(\"\\n--- For-In Loop ---\");\n  var handphone = [\"Xiaomi\", \"Samsung\", \"iPhone\"];\n  for (var hp in handphone) {\n    print(\"Handphone: $hp\");\n  }\n\n  // 3. While Loop\n  print(\"\\n--- While Loop ---\");\n  int b = 1;\n  while (b <= 2) {\n    print(\"While ke-$b\");\n    b++;\n  }\n}\n"
     },
     {
-      "path": "section5.dart",
+      "path": "05_conditional.dart",
       "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "void main() {\n  var nama = \"nabil\";\n\n  if (nama == \"nabil\") {\n    print(\"benar\");\n  } else {\n    print(\"ga kelas\");\n  }\n}\n"
+      "purpose": "Pengkondisian (Control Flow): percabangan logika if-else dan switch-case di Dart.",
+      "source": "void main() {\n  String nilai = \"A\";\n\n  // 1. Percabangan If - Else If - Else\n  if (nilai == \"A\") {\n    print(\"Sangat Memuaskan!\");\n  } else if (nilai == \"B\") {\n    print(\"Bagus!\");\n  } else {\n    print(\"Tetap Semangat!\");\n  }\n\n  // 2. Switch Case\n  String peranan = \"admin\";\n  switch (peranan) {\n    case \"admin\":\n      print(\"Akses penuh sistem dasar.\");\n      break;\n    case \"user\":\n      print(\"Akses halaman pengguna.\");\n      break;\n    default:\n      print(\"Akses tamu.\");\n  }\n}\n"
     },
     {
-      "path": "nullable.dart",
+      "path": "06_null_safety.dart",
       "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "void main() {\n  //null safety -> fitur canggih untuk mengetahui adanya error akibat null\n  //  jenis syntax baru : ? !\n\n  // kesimpulan\n  // 1. ? -> variable diperbolehkan null\n  // 2. ?? -> untuk handle null\n  // 3. ! -> diwajibkan untuk ada value alias haram untuk kosong(null ). data sudah dipastikan harus ada, jika tidak ada maka akan crash\n\n  String? nama;\n\n  print(nama?.length);\n}\n"
+      "purpose": "Null Safety: memahami operator ?, ??, dan ! untuk mencegah NullPointerException di Dart.",
+      "source": "void main() {\n  // 1. Tanda ? menandakan variabel BISA bernilai null\n  String? namaPengguna;\n\n  // 2. Safe Navigation Operator (?.)\n  // Mencegah crash saat mengakses properti dari variabel null\n  print(\"Panjang nama: ${namaPengguna?.length}\");\n\n  // 3. Null-Coalescing Operator (??)\n  // Memberikan nilai default jika variabel bernilai null\n  String namaTampil = namaPengguna ?? \"Tamu / Anonim\";\n  print(\"Halo, $namaTampil!\");\n\n  // 4. Bang Operator (!)\n  // Memaksa Dart menganggap variabel pasti TIDAK null (hati-hati bisa crash jika null!)\n  namaPengguna = \"Nabil\";\n  print(\"Nama pasti: ${namaPengguna!.toUpperCase()}\");\n}\n"
     },
     {
-      "path": "class.dart",
+      "path": "07_class_object.dart",
       "language": "dart",
-      "purpose": "File Dart latihan: berisi konsep utama yang sedang dipelajari di modul ini.",
-      "source": "class pakaian {\n  // Atribut\n  String? jenis;\n  String? warna;\n\n  // //-> Ini adalah constructor di dart\n  // pakaian(String jenisNya, String warnaNya) {\n  //   jenis = jenisNya;\n  //   warna = warnaNya;\n  // }\n\n  // direct named constructor\n  pakaian({this.jenis, this.warna});\n}\n\nvoid main() {\n  var pakaian1 = pakaian(\n    jenis: \"baju\",\n    warna: \"merah\",\n  ); //ini cara memanggil constructor\n\n  // var pakaian2 = pakaian(); //ini adalah cara dasar membuat object dari class pakaian\n  // pakaian2.jenis = \"celana\";\n  // pakaian2.warna = \"hitam\";\n\n  print(\n    \"Ini adalah  ${pakaian1.jenis} dan dia berwarna : ${pakaian1.warna}\",\n  ); //yang di print merupakan variabel dari object yang udah di inisiasi\n\n  // print(\"Ini adalah  ${pakaian2.jenis} dan dia berwarna : ${pakaian2.warna}\");\n}\n"
+      "purpose": "Object-Oriented Programming (OOP): membuat Class, Atribut, dan Named Constructor di Dart.",
+      "source": "class Pakaian {\n  // Atribut/Properti\n  String jenis;\n  String warna;\n\n  // Named Constructor dengan required parameters\n  Pakaian({required this.jenis, required this.warna});\n\n  // Method/Fungsi di dalam Class\n  void tampilkanInfo() {\n    print(\"Pakaian: $jenis - Warna: $warna\");\n  }\n}\n\nvoid main() {\n  // Inisialisasi Objek dari Class Pakaian\n  var pakaian1 = Pakaian(jenis: \"Baju Kaos\", warna: \"Hitam\");\n  var pakaian2 = Pakaian(jenis: \"Celana Chino\", warna: \"Krem\");\n\n  // Memanggil method objek\n  pakaian1.tampilkanInfo();\n  pakaian2.tampilkanInfo();\n}\n"
+    },
+    {
+      "path": "08_async_future.dart",
+      "language": "dart",
+      "purpose": "Asynchronous & Future: memproses tugas di latar belakang dengan async, await, dan Future.delayed.",
+      "source": "// Fungsi Asinkron yang mensimulasikan unduh data API selama 2 detik\nFuture<String> ambilDataAPI() async {\n  print(\"1. Mengunduh data dari server...\");\n  \n  await Future.delayed(const Duration(seconds: 2)); // Menunggu 2 detik\n  \n  return \"2. Data berhasil diterima dari API!\";\n}\n\nvoid main() async {\n  print(\"--- Awal Program ---\");\n  \n  // Memanggil fungsi async dengan await\n  String hasil = await ambilDataAPI();\n  print(hasil);\n  \n  print(\"--- Selesai Program ---\");\n}\n"
+    },
+    {
+      "path": "09_collection_methods.dart",
+      "language": "dart",
+      "purpose": "Manipulasi List & Map: menggunakan map(), where(), forEach(), dan operator spread (...).",
+      "source": "void main() {\n  List<int> angka = [1, 2, 3, 4, 5, 6];\n\n  // 1. .where() -> Menyaring item yang memenuhi kondisi (filtering)\n  var angkaGenap = angka.where((n) => n % 2 == 0).toList();\n  print(\"Angka Genap: $angkaGenap\");\n\n  // 2. .map() -> Mengubah setiap item menjadi bentuk baru (transformation)\n  var angkaKuadrat = angka.map((n) => n * n).toList();\n  print(\"Angka Kuadrat: $angkaKuadrat\");\n\n  // 3. Operator Spread (...) -> Menggabungkan List\n  List<String> buahAwal = [\"Apel\", \"Pisang\"];\n  List<String> semuaBuah = [...buahAwal, \"Jeruk\", \"Mangga\"];\n  print(\"Daftar Buah: $semuaBuah\");\n}\n"
     }
   ],
   "01_widget_sederhana": [

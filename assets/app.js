@@ -6,34 +6,71 @@ const modules = [
     track: "Dart Core",
     folder: "00_belajar_dart",
     level: "Beginner",
-    goal: "Membangun pondasi bahasa Dart sebelum masuk ke Flutter.",
-    files: ["section1.dart", "section2.dart", "section3.dart", "section4.dart", "section5.dart", "nullable.dart", "class.dart"],
-    learn: [
-      "Membedakan tipe data dasar seperti String, int, double, bool, List, dan Map.",
-      "Menggunakan function untuk memecah logic sederhana.",
-      "Memahami loop, conditional, null safety, class, object, dan constructor.",
-      "Membaca error null safety yang sering muncul saat mulai belajar Dart."
+    goal: "Membangun fondasi kuat bahasa pemrograman Dart sebelum masuk ke pengembangan aplikasi Flutter.",
+    files: [
+      "01_variable_list.dart",
+      "02_tipe_data.dart",
+      "03_function.dart",
+      "04_looping.dart",
+      "05_conditional.dart",
+      "06_null_safety.dart",
+      "07_class_object.dart",
+      "08_async_future.dart",
+      "09_collection_methods.dart"
     ],
-    detail: "Dart adalah bahasa yang dipakai Flutter. Di modul ini, fokusnya bukan membuat tampilan, melainkan membiasakan cara berpikir typed language: setiap data punya bentuk, nilai bisa null atau tidak, dan object dibuat dari class. Kalau bagian ini kuat, model API, controller, dan state di modul berikutnya akan jauh lebih mudah dipahami.",
-    concept: ["Variable dan tipe data", "String interpolation", "List dan Map", "Function", "Loop dan conditional", "Null safety", "Class dan constructor"],
+    learn: [
+      "Memahami deklarasi variabel (`var`, `final`, `const`) dan tipe data dasar (`String`, `int`, `double`, `num`, `bool`, `List`, `Map`).",
+      "Membuat fungsi (Functions) baik `void`, fungsi ber-return type, hingga penggunaan *Named Parameters* (`{required ...}`).",
+      "Menguasai alur kontrol perulangan (`for`, `for-in`, `while`) dan percabangan (`if-else`, `switch-case`).",
+      "Memahami *Sound Null Safety* (operator `?`, `??`, `!`) untuk mencegah kesalahan NullPointer secara dini.",
+      "Menguasai Object-Oriented Programming (OOP): membuat Class, Objek, Properti, dan Named Constructor.",
+      "Memahami pemrograman Asinkron (`Future`, `async`, `await`) untuk persiapan mengambil data API di Flutter.",
+      "Menggunakan manipulasi koleksi data modern seperti `.map()`, `.where()`, dan Operator Spread (`...`)."
+    ],
+    detail: "Dart adalah bahasa pemrograman modern berikatan kuat (strongly typed language) buatan Google yang digunakan sebagai mesin penggerak utama Flutter. Di modul fondasi ini, kamu tidak hanya belajar sintaksis dasar, tetapi dibimbing untuk memahami cara berpikir sistematis: bagaimana data disimpan, bagaimana fungsi beraksi, bagaimana mencegah crash akibat data kosong (`null`), serta bagaimana pemrograman Objek (OOP) dan Asinkron (`async`/`await`) menjadi tulang punggung pembuatan aplikasi Flutter berkualitas.",
+    concept: [
+      "Variable & Type Inference",
+      "String Interpolation",
+      "List & Map Data Structure",
+      "Function & Named Parameters",
+      "Control Flow & Loops",
+      "Sound Null Safety (?, ??, !)",
+      "OOP Class & Named Constructor",
+      "Async, Await & Future",
+      "Collection Methods (map, where)"
+    ],
     snippet: `class Pakaian {
-  String? jenis;
-  String? warna;
+  String jenis;
+  String warna;
 
-  Pakaian({this.jenis, this.warna});
+  // Named Constructor dengan parameter wajib
+  Pakaian({required this.jenis, required this.warna});
+
+  void info() => print("Pakaian: $jenis ($warna)");
 }
 
-void main() {
-  final pakaian = Pakaian(jenis: "baju", warna: "merah");
-  print("Ini adalah \${pakaian.jenis} berwarna \${pakaian.warna}");
+Future<void> main() async {
+  final pakaian1 = Pakaian(jenis: "Baju Kaos", warna: "Hitam");
+  pakaian1.info();
+
+  // Contoh Async & Future sederahana
+  await Future.delayed(Duration(seconds: 1));
+  print("Dart Fundamental Siap!");
 }`,
     explanation: [
-      "`String?` berarti property boleh kosong/null.",
-      "`Pakaian({this.jenis, this.warna})` adalah named constructor agar object lebih jelas saat dibuat.",
-      "`final` dipakai karena variable `pakaian` tidak perlu diganti ke object lain."
+      "`class Pakaian` — Struktur cetak biru (blueprint) Objek dalam Dart.",
+      "`Pakaian({required this.jenis, required this.warna})` — Direct Named Constructor untuk memastikan pembuatan objek lebih jelas dan aman dari data kosong.",
+      "`final` — Kata kunci untuk membuat variabel yang nilainya hanya bisa diisi satu kali saat runtime.",
+      "`Future<void> main() async` — Menandai fungsi `main` berjalan secara asinkron.",
+      "`await Future.delayed(...)` — Menghentikan eksekusi sejenak (1 detik) di latar belakang tanpa memblokir sistem."
     ],
-    exercise: ["Buat class `Mahasiswa` dengan property `nama`, `umur`, dan `jurusan`.", "Tambahkan function yang mencetak kalimat profil.", "Ubah salah satu property menjadi nullable lalu coba handle dengan `??`."],
-    run: "dart class.dart"
+    exercise: [
+      "Buka file `01_variable_list.dart` hingga `03_function.dart`, coba jalankan dengan perintah `dart <nama_file>` di terminal.",
+      "Buat class `Mahasiswa` dengan properti `nama`, `nim`, dan `ipk` menggunakan Named Constructor `required`.",
+      "Buat fungsi asinkron `Future<String> fetchUser()` yang mengembalikan nama user setelah menunggu 2 detik.",
+      "Gunakan fungsi `.where()` untuk menyaring daftar angka genap dari sebuah List."
+    ],
+    run: "dart 01_variable_list.dart"
   },
   {
     id: "00A",
@@ -128,6 +165,363 @@ class MyApp extends StatelessWidget {
       "Buat tombol kedua dengan `onPressed` yang mencetak pesan berbeda.",
       "Hapus satu koma atau titik koma dengan sengaja, baca error-nya, lalu kembalikan lagi agar terbiasa memahami pesan error."
     ],
+    deepDive: [
+      {
+        title: "Struktur Folder Project Flutter",
+        type: "folder-tree",
+        description: "Saat kamu menjalankan `flutter create nama_project`, Flutter akan membuat satu folder project lengkap. Berikut gambaran struktur folder yang dihasilkan beserta penjelasan isi setiap bagian.",
+        tree: `nama_project/
+├── android/          → Konfigurasi native Android (Gradle, Manifest, dsb.)
+│   ├── app/
+│   │   ├── build.gradle        → Build config modul app
+│   │   └── src/main/
+│   │       ├── AndroidManifest.xml  → Permission, nama app, icon
+│   │       └── kotlin/…             → Kode native Android (jarang disentuh pemula)
+│   ├── build.gradle              → Build config project-level
+│   └── settings.gradle           → Daftar modul Gradle
+│
+├── ios/              → Konfigurasi native iOS (Xcode, Podfile, dsb.)
+│   ├── Runner/
+│   │   ├── Info.plist            → Metadata app iOS (nama, permission)
+│   │   ├── AppDelegate.swift     → Entry point native iOS
+│   │   └── Assets.xcassets/      → Icon & splash screen iOS
+│   └── Podfile                   → Dependency manager iOS (CocoaPods)
+│
+├── lib/              → FOLDER UTAMA KODE DART/FLUTTER
+│   └── main.dart                 → Entry point aplikasi Flutter
+│
+├── test/             → Unit test dan widget test
+│   └── widget_test.dart          → Contoh test bawaan
+│
+├── build/            → Hasil build (auto-generated, jangan diedit)
+│
+├── web/              → Konfigurasi untuk Flutter Web
+│   ├── index.html                → HTML host untuk Flutter Web
+│   └── manifest.json             → PWA manifest
+│
+├── linux/            → Konfigurasi untuk Flutter Linux desktop
+├── macos/            → Konfigurasi untuk Flutter macOS desktop
+├── windows/          → Konfigurasi untuk Flutter Windows desktop
+│
+├── .gitignore        → File/folder yang diabaikan Git
+├── .metadata         → Metadata project Flutter (auto-generated)
+├── analysis_options.yaml → Aturan linting Dart
+├── pubspec.yaml      → FILE KONFIGURASI UTAMA (dependency, assets, nama app)
+├── pubspec.lock      → Versi dependency yang terkunci (auto-generated)
+└── README.md         → Dokumentasi project`,
+        items: [
+          {
+            icon: "folder-code",
+            name: "lib/",
+            color: "cyan",
+            detail: "Folder paling penting. Semua kode Dart dan Flutter yang kamu tulis akan berada di sini. Secara default hanya berisi `main.dart`, tapi seiring project membesar, kamu akan membuat subfolder seperti `screens/`, `widgets/`, `models/`, `controllers/`, dan `services/`."
+          },
+          {
+            icon: "file-code-2",
+            name: "lib/main.dart",
+            color: "cyan",
+            detail: "File entry point aplikasi. Di sinilah function `main()` dan `runApp()` berada. Flutter memulai semua eksekusi dari file ini. Kamu bisa menganggapnya seperti pintu gerbang utama rumah."
+          },
+          {
+            icon: "package",
+            name: "pubspec.yaml",
+            color: "emerald",
+            detail: "File konfigurasi utama project. Di sini kamu menentukan nama app, versi, dependency/package (misalnya `get:`, `http:`, `google_fonts:`), dan daftar assets (gambar, font). Setiap kali menambah package baru, kamu edit file ini lalu jalankan `flutter pub get`."
+          },
+          {
+            icon: "lock",
+            name: "pubspec.lock",
+            color: "slate",
+            detail: "File auto-generated yang mengunci versi exact setiap dependency. Jangan edit manual — file ini memastikan semua developer di tim menggunakan versi package yang sama."
+          },
+          {
+            icon: "smartphone",
+            name: "android/",
+            color: "emerald",
+            detail: "Berisi konfigurasi native Android. File penting: `AndroidManifest.xml` (permission, nama app), `build.gradle` (SDK version, signing). Untuk pemula, folder ini jarang disentuh kecuali menambah permission (kamera, lokasi) atau mengubah nama/icon app."
+          },
+          {
+            icon: "tablet-smartphone",
+            name: "ios/",
+            color: "slate",
+            detail: "Berisi konfigurasi native iOS. File penting: `Info.plist` (permission, metadata), `Podfile` (dependency CocoaPods). Sama seperti `android/`, pemula jarang perlu masuk ke sini kecuali untuk setting permission atau icon."
+          },
+          {
+            icon: "globe",
+            name: "web/",
+            color: "violet",
+            detail: "Konfigurasi untuk menjalankan Flutter di browser. Berisi `index.html` sebagai host page dan `manifest.json` untuk PWA. Folder ini muncul kalau project di-create dengan dukungan web."
+          },
+          {
+            icon: "flask-conical",
+            name: "test/",
+            color: "amber",
+            detail: "Tempat menulis unit test dan widget test. File bawaan `widget_test.dart` berisi contoh test sederhana. Testing sangat penting tapi untuk pemula, bisa dipelajari belakangan setelah paham widget dan state."
+          },
+          {
+            icon: "hammer",
+            name: "build/",
+            color: "slate",
+            detail: "Folder hasil kompilasi. Isinya auto-generated oleh Flutter saat kamu menjalankan `flutter run` atau `flutter build`. Jangan edit manual dan biasanya di-`.gitignore`."
+          },
+          {
+            icon: "clipboard-list",
+            name: "analysis_options.yaml",
+            color: "slate",
+            detail: "Mengatur aturan linting dan analisis kode Dart. Misalnya menentukan apakah `print()` boleh dipakai, apakah variabel unused harus jadi warning, dsb. Bawaan Flutter sudah cukup bagus untuk pemula."
+          }
+        ]
+      },
+      {
+        title: "Isi pubspec.yaml — File Konfigurasi Utama",
+        type: "code-explain",
+        description: "File `pubspec.yaml` adalah jantung konfigurasi project. Berikut contoh isi dan penjelasan setiap bagiannya.",
+        code: `name: nama_project
+description: \"Aplikasi Flutter pertamaku.\"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  get: ^4.6.6
+  http: ^1.2.2
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700`,
+        language: "yaml",
+        codeExplanation: [
+          "`name` — Nama project, harus lowercase dan pakai underscore. Nama ini juga jadi nama package Dart.",
+          "`description` — Deskripsi singkat project. Berguna kalau kamu publish sebagai package.",
+          "`publish_to: 'none'` — Menandakan project ini bukan package publik, jadi tidak akan di-publish ke pub.dev.",
+          "`version: 1.0.0+1` — Versi app. Format: `major.minor.patch+buildNumber`. Build number penting untuk Play Store dan App Store.",
+          "`environment.sdk` — Versi minimum Dart SDK yang dibutuhkan. Tanda `^` berarti 'versi ini atau lebih baru yang kompatibel'.",
+          "`dependencies` — Daftar package yang dipakai app. `flutter` wajib ada. Package lain ditambahkan di sini, lalu jalankan `flutter pub get`.",
+          "`dev_dependencies` — Package yang hanya dibutuhkan saat development (testing, linting). Tidak masuk ke build produksi.",
+          "`flutter.uses-material-design: true` — Mengaktifkan icon Material Design bawaan Flutter.",
+          "`flutter.assets` — Mendaftarkan folder asset (gambar, file JSON, dsb.) agar bisa diakses dari kode Dart.",
+          "`flutter.fonts` — Mendaftarkan font kustom. Setiap font butuh `family` (nama) dan `asset` (path file `.ttf` atau `.otf`)."
+        ]
+      },
+      {
+        title: "Struktur Folder lib/ yang Rapi (Best Practice)",
+        type: "folder-tree-mini",
+        description: "Saat project mulai membesar, folder `lib/` perlu diorganisir. Berikut pola yang umum dipakai developer Flutter, terutama yang menggunakan GetX dan Get CLI.",
+        tree: `lib/
+├── main.dart                → Entry point, runApp()
+├── app/
+│   ├── routes/
+│   │   ├── app_pages.dart   → Daftar semua halaman & route
+│   │   └── app_routes.dart  → Konstanta nama route
+│   ├── modules/
+│   │   ├── home/
+│   │   │   ├── bindings/home_binding.dart
+│   │   │   ├── controllers/home_controller.dart
+│   │   │   └── views/home_view.dart
+│   │   └── login/
+│   │       ├── bindings/login_binding.dart
+│   │       ├── controllers/login_controller.dart
+│   │       └── views/login_view.dart
+│   ├── data/
+│   │   ├── models/           → Class model data (User, Product, dsb.)
+│   │   ├── providers/        → API call / HTTP request
+│   │   └── services/         → Logic bisnis (auth, storage, dsb.)
+│   └── global_widgets/       → Widget yang dipakai di banyak halaman
+│       ├── custom_button.dart
+│       └── loading_indicator.dart
+├── core/
+│   ├── theme/
+│   │   ├── app_colors.dart   → Konstanta warna
+│   │   └── app_theme.dart    → ThemeData lengkap
+│   ├── utils/
+│   │   └── helpers.dart      → Fungsi utilitas
+│   └── constants/
+│       └── api_constants.dart → Base URL, endpoint, dsb.
+└── generated/                → File auto-generated (intl, dsb.)`,
+        items: [
+          {
+            icon: "log-in",
+            name: "main.dart",
+            color: "cyan",
+            detail: "Titik awal. Hanya berisi `main()`, `runApp()`, dan konfigurasi `GetMaterialApp` atau `MaterialApp`. Tidak ada logic bisnis di sini."
+          },
+          {
+            icon: "map",
+            name: "app/routes/",
+            color: "violet",
+            detail: "Mengatur navigasi. `app_pages.dart` mendaftarkan semua `GetPage`, sedangkan `app_routes.dart` berisi nama-nama route sebagai konstanta agar tidak typo."
+          },
+          {
+            icon: "boxes",
+            name: "app/modules/",
+            color: "emerald",
+            detail: "Setiap fitur/halaman punya folder sendiri berisi `views/` (tampilan), `controllers/` (logic), dan `bindings/` (dependency injection). Ini pola standar Get CLI."
+          },
+          {
+            icon: "database",
+            name: "app/data/",
+            color: "amber",
+            detail: "Berisi `models/` (class data seperti `UserModel`), `providers/` (HTTP request ke API), dan `services/` (logic bisnis seperti auth, cache, dsb.)."
+          },
+          {
+            icon: "palette",
+            name: "core/theme/",
+            color: "violet",
+            detail: "Menyimpan konfigurasi tema: warna, typography, ThemeData. Dengan file terpisah, mengubah tampilan seluruh app cukup di satu tempat."
+          },
+          {
+            icon: "puzzle",
+            name: "global_widgets/",
+            color: "cyan",
+            detail: "Widget reusable yang dipakai di banyak halaman, seperti `CustomButton`, `LoadingIndicator`, `EmptyState`, dsb."
+          }
+        ]
+      },
+      {
+        title: "Visualisasi Widget Tree",
+        type: "widget-tree",
+        description: "Flutter membangun tampilan dari pohon widget (widget tree). Setiap widget bisa punya child atau children. Berikut visualisasi widget tree dari snippet kode di atas.",
+        tree: `MaterialApp
+└── Scaffold
+    ├── AppBar
+    │   └── Text('Belajar Flutter')
+    └── body: Center
+        └── Column
+            ├── Text('Halo, pemula Flutter!')
+            ├── SizedBox(height: 12)
+            └── ElevatedButton
+                └── Text('Klik aku')`,
+        items: [
+          {
+            icon: "tree-deciduous",
+            name: "Cara baca widget tree",
+            color: "cyan",
+            detail: "Baca dari atas ke bawah. Widget paling atas (`MaterialApp`) membungkus semuanya. Semakin ke dalam (indentasi lebih dalam), semakin detail/kecil widget-nya. Ini mirip seperti membaca HTML dari tag terluar ke tag terdalam."
+          },
+          {
+            icon: "git-branch",
+            name: "Parent & Child",
+            color: "emerald",
+            detail: "`Scaffold` adalah child dari `MaterialApp`, dan parent dari `AppBar` serta `Center`. Hubungan parent-child ini menentukan posisi dan ukuran widget di layar."
+          },
+          {
+            icon: "split",
+            name: "child vs children",
+            color: "violet",
+            detail: "Widget yang hanya menerima SATU anak menggunakan `child:` (contoh: `Center`, `Container`). Widget yang menerima BANYAK anak menggunakan `children: [...]` (contoh: `Column`, `Row`, `Stack`)."
+          }
+        ]
+      },
+      {
+        title: "Referensi Simbol Syntax Dart/Flutter",
+        type: "symbol-table",
+        description: "Kode Flutter penuh dengan simbol-simbol yang bisa membingungkan pemula. Berikut panduan cepat setiap simbol yang sering kamu temui.",
+        symbols: [
+          { symbol: "()", name: "Parentheses", usage: "Memanggil function atau constructor. Contoh: `runApp()`, `Text('Halo')`" },
+          { symbol: "{}", name: "Curly Braces", usage: "Body dari function/class, atau named parameter. Contoh: `void main() { }`, `MyApp({super.key})`" },
+          { symbol: "[]", name: "Square Brackets", usage: "Membuat List. Contoh: `children: [Text('A'), Text('B')]`" },
+          { symbol: ";", name: "Semicolon", usage: "Menutup statement. Setiap perintah Dart diakhiri titik koma, kecuali di dalam kurung kurawal class/function." },
+          { symbol: ",", name: "Comma", usage: "Memisahkan parameter, item list, atau property. Trailing comma di akhir sangat disarankan untuk format rapi." },
+          { symbol: ":", name: "Colon", usage: "Menghubungkan nama parameter dengan nilainya. Contoh: `title: Text('Home')`, `color: Colors.red`" },
+          { symbol: "=>", name: "Arrow", usage: "Shorthand untuk function yang cuma return satu expression. Contoh: `String greet() => 'Halo';`" },
+          { symbol: "@override", name: "Annotation", usage: "Menandai bahwa method ini mengganti method dari parent class. Wajib untuk `build()` di StatelessWidget/StatefulWidget." },
+          { symbol: "const", name: "Constant", usage: "Menandai nilai/widget yang tidak berubah. Membantu Flutter mengoptimasi performa rebuild." },
+          { symbol: "final", name: "Final Variable", usage: "Variabel yang hanya bisa diisi sekali. Cocok untuk data dari constructor. Contoh: `final String name;`" },
+          { symbol: "?", name: "Nullable", usage: "Menandai bahwa nilai boleh `null`. Contoh: `String? nama;` berarti `nama` bisa berisi String atau null." },
+          { symbol: "!", name: "Bang Operator", usage: "Memaksa nilai nullable dianggap non-null. Hati-hati, bisa crash kalau nilainya benar-benar null." },
+          { symbol: "??", name: "Null-aware", usage: "Memberikan nilai default kalau sebelahnya null. Contoh: `nama ?? 'Anonim'`" },
+          { symbol: "${}", name: "String Interpolation", usage: "Menyisipkan variabel/expression ke dalam String. Contoh: `'Halo ${nama}'`" }
+        ]
+      },
+      {
+        title: "StatelessWidget vs StatefulWidget",
+        type: "comparison",
+        description: "Dua jenis widget dasar di Flutter. Memahami perbedaannya akan membantu kamu memilih kapan harus pakai yang mana.",
+        left: {
+          title: "StatelessWidget",
+          color: "cyan",
+          points: [
+            "Tampilan TIDAK berubah setelah dibuat",
+            "Tidak punya `State` internal",
+            "Hanya punya method `build()` saja",
+            "Lebih ringan dan sederhana",
+            "Contoh: halaman About, icon statis, label teks",
+            "Cocok untuk UI yang datanya dari luar (parent)"
+          ],
+          code: `class Kartu extends StatelessWidget {
+  final String judul;
+  const Kartu({super.key, required this.judul});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(judul);
+  }
+}`
+        },
+        right: {
+          title: "StatefulWidget",
+          color: "amber",
+          points: [
+            "Tampilan BISA berubah saat runtime",
+            "Punya `State` internal yang bisa di-update",
+            "Punya `createState()` + class `State` terpisah",
+            "Sedikit lebih kompleks",
+            "Contoh: counter, form input, toggle, animasi",
+            "Pakai `setState()` untuk trigger rebuild UI"
+          ],
+          code: `class Counter extends StatefulWidget {
+  const Counter({super.key});
+
+  @override
+  State<Counter> createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  int angka = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () => setState(() => angka++),
+      child: Text('Klik: $angka'),
+    );
+  }
+}`
+        }
+      },
+      {
+        title: "Alur Eksekusi Aplikasi Flutter",
+        type: "flow",
+        description: "Memahami urutan bagaimana Flutter menjalankan kode dari awal sampai tampilan muncul di layar.",
+        steps: [
+          { step: "1", label: "main()", detail: "Dart mulai dari function `main()`. Ini adalah titik masuk semua aplikasi Dart." },
+          { step: "2", label: "runApp()", detail: "`runApp()` menerima satu widget dan menjadikannya root dari widget tree. Widget ini akan mengisi seluruh layar." },
+          { step: "3", label: "MaterialApp", detail: "`MaterialApp` menyiapkan konfigurasi global: theme, routes, locale, dan Material Design style." },
+          { step: "4", label: "Scaffold", detail: "`Scaffold` membangun kerangka halaman: area untuk AppBar di atas, body di tengah, FAB, drawer, bottom nav." },
+          { step: "5", label: "build()", detail: "Method `build()` dipanggil untuk menghasilkan widget tree. Setiap kali state berubah, `build()` dipanggil ulang." },
+          { step: "6", label: "Render", detail: "Flutter engine mengubah widget tree menjadi piksel di layar melalui proses layout, paint, dan compositing." }
+        ]
+      }
+    ],
     run: "flutter create intro_flutter\ncd intro_flutter\nflutter run"
   },
   {
@@ -145,7 +539,7 @@ class MyApp extends StatelessWidget {
       "Menjalankan aksi sederhana lewat `onPressed`.",
       "Melihat hubungan antara widget parent dan child."
     ],
-    detail: "Modul pertama Flutter ini memperlihatkan bahwa tampilan Flutter dibangun dari susunan widget. Kamu mulai dari halaman sederhana, lalu memberi struktur dengan Scaffold dan AppBar. Tombol menjadi contoh interaksi paling kecil yang akan sering muncul di semua app.",
+    detail: "Modul pertama Flutter ini memperlihatkan konsep inti bahwa seluruh tampilan layar aplikasi Flutter dibangun dari susunan widget (Widget Tree). Kamu mulai dari halaman sederhana, lalu memberi struktur kerangka dengan Scaffold dan AppBar. Tombol (ElevatedButton) menjadi contoh interaksi paling kecil yang memicu sebuah fungsi saat ditekan.",
     concept: ["Widget tree", "MaterialApp", "Scaffold", "AppBar", "Body", "Button action"],
     snippet: `void main() {
   runApp(HomePage());
@@ -171,10 +565,12 @@ class HomePage extends StatelessWidget {
   }
 }`,
     explanation: [
-      "`runApp` menjalankan widget utama aplikasi.",
-      "`MaterialApp` menyediakan konfigurasi global Material Design.",
-      "`Scaffold` memberi struktur halaman seperti app bar dan body.",
-      "`onPressed` adalah callback yang berjalan ketika tombol ditekan."
+      "`void main()` — Titik gerbang pertama saat aplikasi dijalankan.",
+      "`runApp(...)` — Memasang widget utama sebagai fondasi awal di layar HP.",
+      "`MaterialApp` — Konfigurasi global yang menyediakan tema, navigasi, dan aturan desain ala Google (Material Design). `debugShowCheckedModeBanner: false` menghilangkan pita merah 'DEBUG'.",
+      "`Scaffold` — Struktur kerangka baku halaman mobile. Menyediakan tempat untuk header (`appBar`), area utama (`body`), tombol aksi (`floatingActionButton`), dan drawer menu.",
+      "`Center` & `ElevatedButton` — `Center` menempatkan widget anaknya di tengah layar, sedangkan `ElevatedButton` membuat tombol timbul yang bisa di-klik.",
+      "`onPressed: () { ... }` — Callback function (fungsi respon) yang langsung dieksekusi begitu tombol ditekan oleh pengguna."
     ],
     exercise: ["Ganti warna `AppBar` dan `backgroundColor`.", "Tambahkan dua tombol dengan aksi berbeda.", "Coba ganti `Center` dengan `Column`."],
     run: "flutter pub get\nflutter run"
@@ -194,7 +590,7 @@ class HomePage extends StatelessWidget {
       "Mengatur posisi dengan `mainAxisAlignment` dan `crossAxisAlignment`.",
       "Memahami ukuran dan warna lewat `Container`."
     ],
-    detail: "Layout adalah skill inti Flutter. Hampir semua tampilan nyata berasal dari kombinasi Row, Column, Container, Padding, Expanded, dan Align. Modul ini melatih mata untuk memahami arah sumbu utama dan sumbu silang.",
+    detail: "Layout adalah fondasi utama dalam mendesain UI Flutter. Hampir 90% tampilan aplikasi nyata diciptakan dari kombinasi `Row` (baris kesamping), `Column` (kolom ke bawah), `Container` (kotak serbaguna), dan `Padding` (jarak dalam). Di modul ini, kamu akan melatih intuisi dalam mengatur arah sumbu utama (main axis) dan sumbu silang (cross axis).",
     concept: ["Column", "Row", "Container", "Alignment", "Spacing", "Padding"],
     snippet: `Scaffold(
   appBar: AppBar(title: const Text("Widget Layout")),
@@ -207,9 +603,12 @@ class HomePage extends StatelessWidget {
   ),
 );`,
     explanation: [
-      "`Column` menyusun child dari atas ke bawah.",
-      "`mainAxisAlignment.center` menaruh child di tengah sumbu utama.",
-      "`Container` sering dipakai untuk latihan ukuran, warna, margin, dan padding."
+      "`Column` — Menyusun anak-anaknya (`children`) secara vertikal dari atas ke bawah.",
+      "`Row` — Alternatif dari `Column`, menyusun anak-anaknya secara horizontal dari kiri ke kanan.",
+      "`mainAxisAlignment: MainAxisAlignment.center` — Menata posisi elemen di sepanjang sumbu utama. Untuk `Column`, sumbu utamanya adalah vertikal (atas-bawah). Untuk `Row`, sumbu utamanya adalah horizontal (kiri-kanan).",
+      "`crossAxisAlignment` — Menata posisi elemen di sumbu silang (kebalikan dari sumbu utama).",
+      "`Container` — Widget kotak serbaguna untuk mengatur `width` (lebar), `height` (tinggi), `color` (warna latar), `padding` (jarak dalam), dan `margin` (jarak luar).",
+      "`children: [...]` — Menerima List widget karena `Column` atau `Row` bisa menampung banyak elemen sekaligus."
     ],
     exercise: ["Ubah `Column` menjadi `Row`.", "Tambahkan `SizedBox` sebagai jarak antar kotak.", "Bungkus kotak dengan `Padding`."],
     run: "flutter pub get\nflutter run"
@@ -229,7 +628,7 @@ class HomePage extends StatelessWidget {
       "Mengirim data ke widget lewat constructor.",
       "Membuat komponen reusable."
     ],
-    detail: "Semakin panjang UI, `main.dart` akan cepat penuh. Extract widget membuat setiap bagian punya tanggung jawab sendiri. Ini kebiasaan penting sebelum masuk ke project besar, slicing UI, dan arsitektur Get CLI.",
+    detail: "Ketika tampilan aplikasi semakin rumit, menumpuk ratusan baris kode di `main.dart` akan menciptakan 'Spaghetti Code' yang membingungkan. Extract Widget adalah teknik memecah UI menjadi komponen-komponen kecil tersendiri yang bisa dipakai berulang kali (reusable) dan dipisahkan ke dalam folder `widgets/`.",
     concept: ["Custom widget", "Constructor", "Required parameter", "Reusable component"],
     snippet: `class KotakWarna extends StatelessWidget {
   final Color warna;
@@ -246,9 +645,10 @@ class HomePage extends StatelessWidget {
   }
 }`,
     explanation: [
-      "`final Color warna` adalah data yang dikirim dari parent.",
-      "`required` memastikan parent wajib mengirim warna.",
-      "Widget ini bisa dipakai berkali-kali dengan warna berbeda."
+      "`class KotakWarna extends StatelessWidget` — Membuat widget buatan sendiri (custom widget) yang siap dipakai berulang kali.",
+      "`final Color warna` — Variabel penampung data (properti) yang akan diterima widget dari parent.",
+      "`required this.warna` — Constructor yang wajib diisi saat widget dipanggil. Tanda `required` memastikan data warna tidak boleh kosong saat dipanggil.",
+      "Manfaat Extract Widget — Kode `main.dart` menjadi sangat bersih, komponen mudah diuji secara terpisah, dan jika adaperubahan tampilan, kita cukup mengubah satu file widget saja."
     ],
     exercise: ["Tambahkan parameter `tinggi` dan `lebar`.", "Tambahkan parameter `child` untuk isi kotak.", "Buat widget baru bernama `JudulSection`."],
     run: "flutter pub get\nflutter run"
@@ -268,7 +668,7 @@ class HomePage extends StatelessWidget {
       "Menghindari penulisan widget berulang secara manual.",
       "Menyiapkan pola untuk list API."
     ],
-    detail: "Builder adalah pola penting untuk membuat item berdasarkan jumlah data. Di app nyata, data bisa datang dari array, database, atau API. Flutter hanya membangun item yang diperlukan sehingga lebih efisien untuk list panjang.",
+    detail: "`ListView.builder` adalah teknik pembuatan daftar item secara efisien (Lazy Loading). Alih-alih membuat seluruh 1000 item sekaligus yang menguras memori HP, `builder` hanya merender item yang sedang tampil di layar ponsel penggunanya.",
     concept: ["ListView.builder", "itemCount", "itemBuilder", "index", "Dynamic UI"],
     snippet: `ListView.builder(
   itemCount: 10,
@@ -279,9 +679,10 @@ class HomePage extends StatelessWidget {
   },
 );`,
     explanation: [
-      "`itemCount` menentukan jumlah item.",
-      "`itemBuilder` membuat tampilan untuk setiap index.",
-      "Modulo `%` dipakai agar index warna tetap aman meski item lebih banyak."
+      "`itemCount: 10` — Menentukan total jumlah elemen yang akan dibuat dalam daftar.",
+      "`itemBuilder: (context, index) { ... }` — Fungsi pembuat tampilan yang akan dipanggil berulang kali untuk setiap posisi `index` (dimulai dari 0 hingga itemCount-1).",
+      "`index` — Urutan nomor posisi item saat ini (0, 1, 2, ...).",
+      "Sumbu scroll otomatis — `ListView` secara default sudah memiliki kemampuan scroll vertikal tanpa perlu dibungkus widget scroll tambahan."
     ],
     exercise: ["Buat list nama lalu tampilkan dengan `ListTile`.", "Tambahkan nomor urut dari `index + 1`.", "Ubah `ListView` menjadi `GridView.builder`."],
     run: "flutter pub get\nflutter run"
@@ -301,7 +702,7 @@ class HomePage extends StatelessWidget {
       "Melatih spacing, warna, alignment, dan ukuran.",
       "Membiasakan struktur file latihan."
     ],
-    detail: "Folder ini berperan seperti gym kecil untuk Flutter. Banyak soal pendek membuat kamu tidak hanya paham teori, tapi terbiasa mengetik dan menyusun widget. Ini penting sebelum mengerjakan UI yang lebih kompleks.",
+    detail: "Folder latihan ini dirancang untuk membentuk 'Muscle Memory' mengetik struktur widget. Dengan menyelesaikan puluhan bentuk layout mini (kotak, lingkaran, deretan teks, kombinasi warna), kamu akan terbiasa menyusun susunan hirarki Flutter tanpa perlu melihat dokumentasi berulang kali.",
     concept: ["Practice repetition", "Layout composition", "Spacing", "Color", "Widget nesting"],
     snippet: `class Soal1 extends StatelessWidget {
   const Soal1({super.key});
@@ -316,9 +717,9 @@ class HomePage extends StatelessWidget {
   }
 }`,
     explanation: [
-      "Setiap file `soal_*` mewakili latihan kecil.",
-      "`Center` membantu menaruh widget di tengah layar.",
-      "`Container` dipakai untuk latihan bentuk visual sederhana."
+      "Pola latihan terpisah — Setiap file `soal_*.dart` menangani satu kasus tantangan desain visual.",
+      "Latihan Hirarki Widget — Mengasah kemampuan berpikir dalam bentuk kotak di dalam kotak (Nesting Widgets).",
+      "Pondasi Slicing UI — Menjadi bekal sebelum memotong desain kompleks dari Figma ke dalam kode Flutter."
     ],
     exercise: ["Pilih 3 soal lalu ubah warnanya.", "Tambahkan border radius di salah satu soal.", "Gabungkan dua soal ke satu halaman dengan `Column`."],
     run: "flutter pub get\nflutter run"
@@ -338,7 +739,7 @@ class HomePage extends StatelessWidget {
       "Menggunakan `setState` untuk rebuild UI.",
       "Membuat counter sederhana."
     ],
-    detail: "Kalau tampilan berubah karena tombol, input, API, atau pilihan user, kamu membutuhkan state. Di Flutter basic, state lokal biasanya dikelola dengan `StatefulWidget` dan `setState`. Nanti di GetX, state ini dipindah ke controller.",
+    detail: "Dalam Flutter, 'State' adalah data atau informasi yang bisa berubah saat aplikasi berjalan (misalnya jumlah keranjang belanja, teks input, atau status centang). `StatelessWidget` dipakai untuk tampilan yang tidak pernah berubah setelah digambar, sedangkan `StatefulWidget` dipakai ketika tampilan harus merespon perubahan data pengguna secara real-time.",
     concept: ["StatelessWidget", "StatefulWidget", "State object", "setState", "Rebuild"],
     snippet: `class CounterPage extends StatefulWidget {
   const CounterPage({super.key});
@@ -357,9 +758,10 @@ class _CounterPageState extends State<CounterPage> {
   }
 }`,
     explanation: [
-      "`counter` disimpan di class State karena nilainya berubah.",
-      "`setState` memberi sinyal ke Flutter untuk menggambar ulang UI.",
-      "Kalau lupa `setState`, data berubah tapi tampilan tidak ikut berubah."
+      "`StatefulWidget` — Widget yang memiliki variabel data yang nilainya dinamis (bisa berubah).",
+      "`class _CounterPageState` — Objek State tempat menyimpan logika dan variabel internal (`counter`).",
+      "`setState(() { ... })` — Perintah KUNCI di Flutter! Fungsi ini memberitahu Flutter bahwa data di dalamnya telah berubah, sehingga Flutter akan secara otomatis memanggil ulang method `build()` untuk menggambar ulang tampilan dengan angka baru.",
+      "Apa yang terjadi jika lupa `setState`? — Nilai variabel di memori HP berubah, tetapi tampilan di layar HP TIDAK AKAN ter-update karena Flutter tidak tahu ada data yang berubah."
     ],
     exercise: ["Tambahkan tombol kurang.", "Tambahkan tombol reset.", "Tampilkan pesan jika counter lebih dari 10."],
     run: "flutter pub get\nflutter run"
@@ -379,7 +781,7 @@ class _CounterPageState extends State<CounterPage> {
       "Menutup dialog dengan `Navigator.pop`.",
       "Menentukan kapan dialog cocok dipakai."
     ],
-    detail: "Dialog membantu user mengambil keputusan sebelum aksi penting seperti hapus data atau logout. Karena dialog adalah route kecil di atas halaman, ia bisa ditutup dengan `Navigator.pop`.",
+    detail: "Dialog adalah pop-up modal yang muncul melayang di atas tampilan layar aktif. Fitur ini sangat penting untuk meminta keputusan atau konfirmasi krusial dari pengguna sebelum aksi berbahaya dilakukan (seperti konfirmasi hapus data, keluar aplikasi, atau peringatan koneksi terputus). Karena dialog bertindak sebagai 'route modal', menutupnya dilakukan dengan `Navigator.pop(context)`.",
     concept: ["showDialog", "AlertDialog", "actions", "Navigator.pop", "BuildContext"],
     snippet: `showDialog(
   context: context,
@@ -397,9 +799,10 @@ class _CounterPageState extends State<CounterPage> {
   },
 );`,
     explanation: [
-      "`showDialog` membutuhkan `context` dari widget tree.",
-      "`builder` mengembalikan widget dialog.",
-      "`actions` biasanya berisi tombol batal dan konfirmasi."
+      "`showDialog(context: context, ...)` — Fungsi pembuka dialog yang memerlukan `context` untuk mengetahui posisi hirarki di layar.",
+      "`builder: (context) { ... }` — Closure pembentuk UI dialog yang mengembalikan widget `AlertDialog`.",
+      "`AlertDialog` — Widget standar Material yang memiliki area `title` (judul), `content` (pesan penjelasan), dan `actions` (daftar tombol pilihan di bagian kanan bawah).",
+      "`Navigator.pop(context)` — Menutup dialog yang sedang melayang dan mengembalikan kontrol ke layar sebelumnya."
     ],
     exercise: ["Tambahkan tombol `Ya` dan `Batal`.", "Buat dialog sukses setelah tombol ditekan.", "Ubah content dialog menjadi widget custom."],
     run: "flutter pub get\nflutter run"
@@ -419,7 +822,7 @@ class _CounterPageState extends State<CounterPage> {
       "Membedakan snackbar dengan dialog.",
       "Memberikan feedback setelah user menekan tombol."
     ],
-    detail: "Snackbar cocok untuk pesan yang tidak memblokir user. Berbeda dengan dialog, snackbar hanya muncul sebentar lalu hilang, sehingga cocok untuk informasi sukses, gagal ringan, atau status proses.",
+    detail: "Berbeda dari Dialog yang menghentikan aktivitas user, `SnackBar` adalah pesan notifikasi melayang di bawah layar yang bersifat ringan dan otomatis menghilang setelah beberapa detik. Sangat cocok untuk memberikan konfirmasi instan seperti 'Data berhasil disimpan', 'Item masuk keranjang', atau 'Koneksi gagal'.",
     concept: ["ScaffoldMessenger", "SnackBar", "Feedback UI", "Duration"],
     snippet: `ScaffoldMessenger.of(context).showSnackBar(
   const SnackBar(
@@ -428,9 +831,10 @@ class _CounterPageState extends State<CounterPage> {
   ),
 );`,
     explanation: [
-      "`ScaffoldMessenger` mencari scaffold aktif.",
-      "`SnackBar` berisi widget content.",
-      "Durasi pendek membuat pesan tidak mengganggu alur user."
+      "`ScaffoldMessenger.of(context)` — Pengelola notifikasi pesan di Flutter yang mencari `Scaffold` aktif terdekat.",
+      "`showSnackBar(...)` — Perintah untuk menayangkan widget `SnackBar` ke layar HP.",
+      "`SnackBar` — Berisi properti `content` (biasanya widget `Text`), `duration` (jangka waktu tayang sebelum hilang otomatis), serta warna latar `backgroundColor`.",
+      "Perbedaan dengan Dialog — SnackBar TIDAK mengunci layar HP, pengguna tetap bisa menekan tombol lain saat SnackBar muncul."
     ],
     exercise: ["Buat snackbar sukses dan gagal.", "Tambahkan action button di snackbar.", "Ubah posisi snackbar dengan behavior floating."],
     run: "flutter pub get\nflutter run"
@@ -450,7 +854,7 @@ class _CounterPageState extends State<CounterPage> {
       "Mengatur label, hint, dan border input.",
       "Menjalankan aksi submit."
     ],
-    detail: "Input adalah pintu masuk data dari user. Controller menyimpan text yang sedang diketik. Di app nyata, kamu juga perlu validasi, keyboard type, dan dispose controller jika menggunakan StatefulWidget.",
+    detail: "`TextField` adalah komponen masukan teks tempat pengguna mengetikkan informasi (misalnya nama, email, password, atau pesan pencarian). Di Flutter, membaca teks yang diketikkan pengguna dikendalikan oleh objek pengontrol bernama `TextEditingController`.",
     concept: ["TextField", "TextEditingController", "InputDecoration", "Form input"],
     snippet: `final TextEditingController namaC = TextEditingController();
 
@@ -469,9 +873,10 @@ ElevatedButton(
   child: const Text("Submit"),
 );`,
     explanation: [
-      "`TextEditingController` membaca dan mengubah isi input.",
-      "`InputDecoration` mengatur tampilan field.",
-      "`namaC.text` berisi value yang sedang diketik user."
+      "`TextEditingController namaC = TextEditingController()` — Pengontrol yang bertindak menyimpan teks inputan secara real-time.",
+      "`controller: namaC` — Menghubungkan widget `TextField` ke variabel pengontrol `namaC`.",
+      "`InputDecoration` — Mengatur tampilan visual bidang input, seperti `labelText` (label di atas border), `hintText` (teks samar petunjuk), dan `border: OutlineInputBorder()` (garis tepi).",
+      "`namaC.text` — Properti untuk mengambil isi teks yang sedang diketikkan pengguna saat tombol diklik."
     ],
     exercise: ["Tambahkan field email.", "Validasi jika input kosong.", "Tampilkan hasil input ke Text di halaman."],
     run: "flutter pub get\nflutter run"
@@ -491,7 +896,7 @@ ElevatedButton(
       "Menghubungkan tab dengan `TabBarView`.",
       "Menjaga jumlah tab dan view tetap sama."
     ],
-    detail: "TabBar cocok untuk konten yang masih satu konteks, misalnya kategori chat, produk, atau status order. Berbeda dari navigation page, tab biasanya tidak terasa seperti pindah halaman besar.",
+    detail: "Navigasi Tab (`TabBar`) digunakan untuk membagi konten satu halaman menjadi beberapa kategori yang relevan (misalnya di aplikasi WhatsApp: Tab CHATS, STATUS, dan CALLS). Pengguna dapat berpindah antar kategori dengan mengetap tombol tab atau mengusap (swipe) layar ke kiri dan kanan.",
     concept: ["DefaultTabController", "TabBar", "TabBarView", "Tab"],
     snippet: `DefaultTabController(
   length: 3,
@@ -507,9 +912,10 @@ ElevatedButton(
   ),
 );`,
     explanation: [
-      "`length` harus sama dengan jumlah tab.",
-      "`TabBar` menampilkan tombol tab.",
-      "`TabBarView` menampilkan isi dari tab aktif."
+      "`DefaultTabController(length: 3)` — Pengatur state tab yang mengoordinasikan indeks tab aktif secara otomatis. `length` menentukan total jumlah tab.",
+      "`TabBar` — Deretan tombol navigasi tab yang dipasang di bagian bawah `AppBar` (`appBar: AppBar(bottom: TabBar(...)))`.",
+      "`TabBarView` — Tampilan isi konten untuk setiap tab. Jumlah anak (`children`) di `TabBarView` WAJIB SAMA persis dengan jumlah `tabs` di `TabBar`.",
+      "Dukungan Gestur Swipe — `TabBarView` secara otomatis mendukung gestur geser jari (swipe) untuk berpindah antar halaman."
     ],
     exercise: ["Tambahkan icon di setiap tab.", "Buat isi tiap tab menjadi widget sendiri.", "Ubah warna indicator tab."],
     run: "flutter pub get\nflutter run"
@@ -529,7 +935,7 @@ ElevatedButton(
       "Mengubah state saat pilihan berubah.",
       "Menampilkan data pilihan user."
     ],
-    detail: "Dropdown dipakai saat user harus memilih satu opsi dari daftar terbatas. Kunci utamanya adalah menyimpan value aktif dan memastikan value itu ada di daftar items.",
+    detail: "`DropdownButton` dipakai ketika pengguna harus memilih satu opsi pilihan dari daftar opsi yang sudah ditentukan (misalnya memilih jenis kelamin, daftar kota, atau agama). Teknik utamanya adalah mencocokkan variabel pilihan aktif (`value`) dengan daftar `DropdownMenuItem`.",
     concept: ["DropdownButton", "DropdownMenuItem", "selectedValue", "onChanged"],
     snippet: `DropdownButton<String>(
   value: selectedValue,
@@ -544,9 +950,10 @@ ElevatedButton(
   },
 );`,
     explanation: [
-      "`value` adalah pilihan saat ini.",
-      "`items` adalah daftar pilihan yang tersedia.",
-      "`onChanged` dipakai untuk menyimpan pilihan baru."
+      "`DropdownButton<String>` — Widget dropdown berspesifikasi tipe data (dalam contoh ini `String`).",
+      "`value: selectedValue` — Nilai terpilih saat ini yang ditampilkan di kotak dropdown.",
+      "`items: [...]` — Daftar opsi pilihan yang dibungkus oleh widget `DropdownMenuItem`.",
+      "`onChanged: (newValue) { setState(() { selectedValue = newValue; }); }` — Fungsi yang dipanggil saat pengguna memilih opsi baru untuk meng-update variabel `selectedValue` via `setState`."
     ],
     exercise: ["Buat dropdown level belajar.", "Tampilkan keterangan berdasarkan pilihan.", "Buat pilihan default bernilai null."],
     run: "flutter pub get\nflutter run"
@@ -566,7 +973,7 @@ ElevatedButton(
       "Mengganti body halaman berdasarkan index.",
       "Memahami pola navigasi aplikasi mobile."
     ],
-    detail: "Bottom navigation cocok untuk menu utama yang sering dipakai seperti Home, Search, Favorite, Profile. Biasanya jumlah item idealnya 3 sampai 5 agar tetap nyaman di layar mobile.",
+    detail: "`BottomNavigationBar` adalah pola navigasi paling populer di aplikasi mobile modern (seperti Instagram, Tokopedia, YouTube). Menempatkan 3 sampai 5 menu utama permanen di bagian bawah layar ponsel agar mudah dijangkau jempol tangan.",
     concept: ["BottomNavigationBar", "currentIndex", "onTap", "Indexed content"],
     snippet: `int currentIndex = 0;
 
@@ -583,9 +990,10 @@ BottomNavigationBar(
   ],
 );`,
     explanation: [
-      "`currentIndex` menentukan tab/menu aktif.",
-      "`onTap` menerima index item yang ditekan.",
-      "Isi body biasanya diambil dari list halaman berdasarkan index."
+      "`currentIndex` — Variabel penyimpan indeks menu mana yang sedang aktif (dimulai dari 0 untuk menu pertama).",
+      "`onTap: (index) { ... }` — Fungsi pembalik nilai saat salah satu item menu ditekan oleh pengguna.",
+      "`BottomNavigationBarItem` — Komponen penyusun menu yang membutuhkan `icon` dan `label`.",
+      "Mengganti Halaman `body` — Properti `body` pada `Scaffold` dihubungkan dengan indeks array daftar halaman: `body: listHalaman[currentIndex]`."
     ],
     exercise: ["Tambahkan menu Settings.", "Buat list halaman untuk setiap menu.", "Ubah selected item color."],
     run: "flutter pub get\nflutter run"
@@ -605,7 +1013,7 @@ BottomNavigationBar(
       "Menutup bottom sheet dengan `Navigator.pop`.",
       "Memilih kapan bottom sheet lebih cocok daripada dialog."
     ],
-    detail: "Bottom sheet bagus untuk menu aksi, filter, share option, atau form pendek. Ia terasa lebih mobile-friendly karena muncul dari bawah, dekat dengan jangkauan jempol user.",
+    detail: "`Bottom Sheet` adalah panel dialog khusus yang meluncur keluar dari tepi bawah layar ponsel. Sangat nyaman untuk perangkat layar sentuh saat menampilkan menu pilihan opsi, filter produk, rincian pembayaran, atau opsi bagikan (share).",
     concept: ["showModalBottomSheet", "Modal panel", "Action menu", "Navigator.pop"],
     snippet: `showModalBottomSheet(
   context: context,
@@ -622,11 +1030,12 @@ BottomNavigationBar(
   },
 );`,
     explanation: [
-      "`builder` mengembalikan isi panel.",
-      "`SizedBox` memberi tinggi panel.",
-      "`Navigator.pop` menutup bottom sheet."
+      "`showModalBottomSheet` — Fungsi pemanggil panel modal dari dasar layar HP.",
+      "`builder: (context) { ... }` — Fungsi pembentuk komponen UI yang akan tampil di dalam panel modal bawah.",
+      "Desain Ergonomis — Berbeda dari Dialog tengah yang mengharuskan tangan menjangkau tengah layar, Bottom Sheet sangat mudah dioperasikan dengan satu jempol tangan.",
+      "`Navigator.pop(context)` — Menutup panel bottom sheet dan mengembalikannya turun ke bawah."
     ],
-    exercise: ["Buat bottom sheet berisi 3 menu.", "Tambahkan icon di setiap menu.", "Buat bottom sheet untuk filter data."],
+    exercise: ["Buat bottom sheet berisi 3 menu.", "Tambahkan icon di mebuhan.", "Buat bottom sheet untuk filter data."],
     run: "flutter pub get\nflutter run"
   },
   {
@@ -642,9 +1051,9 @@ BottomNavigationBar(
       "Menggunakan property `drawer` di `Scaffold`.",
       "Membuat `DrawerHeader`.",
       "Menyusun menu dengan `ListTile`.",
-      "Menutup drawer setelah item ditekan."
+      "Menutup drawer mebuhan."
     ],
-    detail: "Drawer biasanya berisi navigasi tambahan, profil user, atau setting. Untuk menu utama aplikasi mobile modern, drawer bisa dipadukan dengan bottom navigation jika menunya cukup banyak.",
+    detail: "`Drawer` adalah panel navigasi samping (Side Menu) yang tersembunyi di luar layar kiri dan akan bergeser keluar ketika pengguna menekan tombol ikon tiga garis (Hamburger Menu) atau mengusap layar dari tepi paling kiri.",
     concept: ["Drawer", "DrawerHeader", "ListView", "ListTile"],
     snippet: `Scaffold(
   appBar: AppBar(title: const Text("Drawer")),
@@ -658,9 +1067,9 @@ BottomNavigationBar(
   ),
 );`,
     explanation: [
-      "`drawer` otomatis terhubung dengan hamburger menu di AppBar.",
-      "`DrawerHeader` memberi area header.",
-      "`ListTile` cocok untuk item menu karena punya icon, title, subtitle, dan trailing."
+      "`drawer: Drawer(...)` — Properti bawaan `Scaffold`. Saat properti ini diisi, Flutter secara OTOMATIS membuatkan ikon 3 garis (Hamburger Icon) di AppBar kiri.",
+      "`DrawerHeader` — Area paling atas drawer yang biasa diisi nama profil, foto avatar, atau logo aplikasi.",
+      "`ListTile` — Baris menu dengan icon di sebelah kiri (`leading`) dan teks judul (`title`)."
     ],
     exercise: ["Tambahkan menu Profile dan Settings.", "Buat header berisi avatar.", "Tambahkan aksi navigasi saat menu ditekan."],
     run: "flutter pub get\nflutter run"
@@ -680,7 +1089,7 @@ BottomNavigationBar(
       "Kembali dengan `Navigator.pop`.",
       "Memahami stack navigation."
     ],
-    detail: "Navigator bekerja seperti tumpukan halaman. `push` menaruh halaman baru di atas halaman lama, sedangkan `pop` menghapus halaman paling atas. Konsep ini akan dipakai ulang oleh GetX route management.",
+    detail: "Navigasi di Flutter dikelola menggunakan konsep tumpukan kartu (Navigation Stack). Ketika membuka halaman baru, halaman tersebut ditumpuk di atas halaman lama (`push`). Ketika menekan tombol Kembali (Back), halaman paling atas dibuang dari tumpukan (`pop`).",
     concept: ["Navigator", "MaterialPageRoute", "push", "pop", "Navigation stack"],
     snippet: `Navigator.push(
   context,
@@ -691,9 +1100,9 @@ BottomNavigationBar(
 
 Navigator.pop(context);`,
     explanation: [
-      "`MaterialPageRoute` membuat route dengan animasi Material.",
-      "`builder` menentukan halaman tujuan.",
-      "`Navigator.pop` kembali ke halaman sebelumnya."
+      "`Navigator.push(context, route)` — Menumpuk halaman baru ke atas tumpukan navigasi.",
+      "`MaterialPageRoute` — Kelas pembuat rute navigasi yang menyertakan animasi transisi khas platform (geser kanan untuk iOS / muncul ke atas untuk Android).",
+      "`Navigator.pop(context)` — Menghapus halaman teratas dan menutupnya sehingga pengguna kembali ke layar sebelumnya."
     ],
     exercise: ["Kirim data dari Home ke Product.", "Tambahkan halaman Detail.", "Buat tombol back custom."],
     run: "flutter pub get\nflutter run"
@@ -751,7 +1160,7 @@ Navigator.pop(context);`,
       "Membaca status code.",
       "Decode JSON dan update UI."
     ],
-    detail: "GET adalah metode API paling umum untuk mengambil data. Di modul ini kamu melihat alur lengkap: klik tombol, request ke endpoint, decode response, lalu setState agar data tampil.",
+    detail: "HTTP GET adalah metode protokol internet paling dasar untuk meminta dan mengambil data dari server Backend (REST API). Di Flutter, kita menggunakan package `http` dengan kata kunci `async` dan `await` untuk menunggu proses pengiriman data dari jaringan internet tanpa membuat aplikasi kita macet (freeze).",
     concept: ["HTTP GET", "async await", "statusCode", "jsonDecode", "setState"],
     snippet: `var response = await myhttp.get(
   Uri.parse("https://jsonplaceholder.typicode.com/todos/3"),
@@ -766,9 +1175,11 @@ if (response.statusCode == 200) {
   });
 }`,
     explanation: [
-      "`await` menunggu response selesai.",
-      "`jsonDecode` mengubah JSON string menjadi Map/List.",
-      "`setState` memicu UI untuk menampilkan data baru."
+      "`async` & `await` — `async` menandai fungsi berjalan secara asinkron (di latar belakang), sedangkan `await` menginstruksikan program untuk menunggu hingga respon dari server selesai diunduh.",
+      "`Uri.parse(...)` — Mengubah teks URL string menjadi objek URI yang valid untuk dikirimkan melalui protokol HTTP.",
+      "`response.statusCode == 200` — Kode status HTTP standar yang menandakan bahwa server berhasil memproses dan memberikan data dengan sukses.",
+      "`jsonDecode(response.body)` — Mengonversi teks JSON mentah dari `response.body` menjadi struktur data `Map` atau `List` di Dart.",
+      "`setState(() { ... })` — Memasukkan data baru hasil API ke variabel lokal dan menggambar ulang UI agar data terbaru langsung tampil."
     ],
     exercise: ["Ganti endpoint ke `/posts/1`.", "Tampilkan field `body`.", "Tambahkan pesan jika status code bukan 200."],
     run: "flutter pub get\nflutter run"
@@ -788,7 +1199,7 @@ if (response.statusCode == 200) {
       "Mengecek response server.",
       "Membaca hasil data yang dibuat."
     ],
-    detail: "POST dipakai saat app perlu membuat data baru, misalnya register, login, membuat post, atau menyimpan form. Meski API latihan tidak benar-benar menyimpan permanen, pola request-nya sama.",
+    detail: "Berbeda dari `GET` yang hanya mengambil data, metode `POST` digunakan untuk membuat atau menambahkan data baru ke database server (misalnya saat mendaftarkan akun baru, mengirim formulir kontak, atau membuat postingan). Data yang dikirim dimasukkan ke dalam properti `body` request.",
     concept: ["HTTP POST", "Request body", "Create data", "Response body"],
     snippet: `var response = await myhttp.post(
   Uri.parse("https://jsonplaceholder.typicode.com/posts"),
@@ -802,9 +1213,10 @@ if (response.statusCode == 200) {
 print(response.statusCode);
 print(response.body);`,
     explanation: [
-      "`body` berisi data yang dikirim.",
-      "Server biasanya mengembalikan data baru atau id baru.",
-      "Status code 201 sering berarti data berhasil dibuat."
+      "`myhttp.post(...)` — Mengirim perintah pembuat data baru ke endpoint API server.",
+      "`body: { ... }` — Objek Map yang berisi payload/informasi data baru yang akan disimpan ke database server.",
+      "`statusCode == 201 (Created)` — Kode status standar dari server yang mengonfirmasi bahwa data baru telah berhasil diciptakan.",
+      "`response.body` — Server biasanya mengembalikan salinan data baru tersebut lengkap dengan nomor `id` unik yang baru dibuat oleh database."
     ],
     exercise: ["Ambil input dari TextField lalu kirim POST.", "Tampilkan response di UI.", "Tambahkan loading saat request berjalan."],
     run: "flutter pub get\nflutter run"
@@ -824,7 +1236,7 @@ print(response.body);`,
       "Mengirim field yang ingin diubah.",
       "Mengecek response update."
     ],
-    detail: "PUT biasanya dipakai untuk mengganti data penuh, sedangkan PATCH untuk mengubah sebagian field. Dalam latihan beginner, yang penting adalah paham bahwa update butuh endpoint detail dengan id.",
+    detail: "Metode `PUT` dan `PATCH` digunakan untuk memperbarui (update) data yang sudah ada di server. Perbedaan utamanya: `PUT` digunakan untuk mengganti seluruh dokumen data secara menyeluruh, sedangkan `PATCH` hanya memperbarui bidang/field tertentu yang berubah saja.",
     concept: ["HTTP PUT", "HTTP PATCH", "Update data", "Endpoint by id"],
     snippet: `var response = await myhttp.patch(
   Uri.parse("https://jsonplaceholder.typicode.com/posts/1"),
@@ -836,9 +1248,9 @@ print(response.body);`,
 print(response.statusCode);
 print(response.body);`,
     explanation: [
-      "`/posts/1` berarti data dengan id 1.",
-      "`PATCH` hanya mengirim field yang diubah.",
-      "Response dipakai untuk memastikan update berhasil."
+      "`/posts/1` — URL endpoint API yang menyertakan nomor ID data spesifik (`1`) yang hendak diubah di server.",
+      "`myhttp.patch(...)` — Mengirim pembaruan sebagian data tanpa mengganggu bidang data lainnya.",
+      "`body: { 'title': '...' }` — Hanya mengirimkan properti `title` saja yang ingin diubah nilainya."
     ],
     exercise: ["Ubah dari PATCH ke PUT.", "Update title dari TextField.", "Tampilkan response title ke UI."],
     run: "flutter pub get\nflutter run"
@@ -858,7 +1270,7 @@ print(response.body);`,
       "Mengecek status berhasil.",
       "Memahami pentingnya konfirmasi sebelum delete."
     ],
-    detail: "DELETE adalah aksi yang rawan karena menghapus data. Di aplikasi sungguhan, tombol delete biasanya didahului dialog konfirmasi agar user tidak salah tekan.",
+    detail: "Metode `DELETE` digunakan untuk menghapus data permanen dari database server berdasarkan nomor ID unik data tersebut. Karena aksi ini tidak bisa dibatalkan (destructive action), sangat disarankan untuk selalu menampilkan konfirmasi `AlertDialog` sebelum perintah ini dieksekusi.",
     concept: ["HTTP DELETE", "Delete by id", "Status code", "Confirmation flow"],
     snippet: `var response = await myhttp.delete(
   Uri.parse("https://jsonplaceholder.typicode.com/posts/1"),
@@ -868,9 +1280,9 @@ if (response.statusCode == 200) {
   print("Data berhasil dihapus");
 }`,
     explanation: [
-      "Endpoint delete biasanya menyertakan id data.",
-      "Status code dipakai sebagai penanda berhasil/gagal.",
-      "Tambahkan dialog jika delete dipicu dari tombol UI."
+      "`myhttp.delete(...)` — Mengirim instruksi penghapusan ke URL endpoint dengan ID spesifik (`/posts/1`).",
+      "`statusCode == 200` atau `204 (No Content)` — Menandakan bahwa server telah sukses menghapus data tersebut.",
+      "Alur UX Terbaik — Gabungkan aksi DELETE dengan konfirmasi Dialog dan `SnackBar` sukses untuk kenyamanan pengguna."
     ],
     exercise: ["Tambahkan AlertDialog sebelum delete.", "Tampilkan snackbar setelah berhasil.", "Buat input id data yang ingin dihapus."],
     run: "flutter pub get\nflutter run"
@@ -886,11 +1298,11 @@ if (response.statusCode == 200) {
     files: ["lib/main.dart", "pubspec.yaml"],
     learn: [
       "Membuat function `Future`.",
-      "Menghubungkan `future` ke UI.",
+      "Menhubungkan `future` ke UI.",
       "Membaca `snapshot.connectionState`.",
       "Menangani error dan data kosong."
     ],
-    detail: "FutureBuilder membuat UI lebih rapi saat membaca data async. Daripada membuat banyak variable manual untuk loading dan data, FutureBuilder menyediakan snapshot yang menggambarkan proses request.",
+    detail: "`FutureBuilder` adalah widget ajaib di Flutter yang secara otomatis memantau status pengunduhan data asinkron (Future). Widget ini secara otomatis mengganti tampilan UI dari kondisi **Sedang Memuat (Loading)**, **Terjadi Error (Error)**, hingga **Data Berhasil Diterima (Success)** tanpa perlu mengelola variabel `setState` secara manual.",
     concept: ["Future", "FutureBuilder", "snapshot", "loading", "error", "ListView.builder"],
     snippet: `FutureBuilder<List<dynamic>>(
   future: getData(),
@@ -913,9 +1325,10 @@ if (response.statusCode == 200) {
   },
 );`,
     explanation: [
-      "`waiting` berarti Future belum selesai.",
-      "`hasError` menangkap error dari Future.",
-      "Setelah sukses, data bisa ditampilkan dengan builder."
+      "`future: getData()` — Menghubungkan fungsi asinkron pengambil API ke `FutureBuilder`.",
+      "`snapshot.connectionState == ConnectionState.waiting` — Kondisi saat jaringan sedang sibuk mengunduh data -> tampilkan animasi spinner `CircularProgressIndicator`.",
+      "`snapshot.hasError` — Kondisi jika jaringan putus atau server crash -> tampilkan teks pesan error.",
+      "`snapshot.data!` — Kondisi ketika data dari API telah sukses diterima -> rendet data ke dalam `ListView.builder`."
     ],
     exercise: ["Ubah itemCount menjadi `data.length`.", "Tambahkan empty state.", "Pisahkan item list ke widget sendiri."],
     run: "flutter pub get\nflutter run"
@@ -1232,7 +1645,7 @@ flutter_launcher_icons:
       "Menyiapkan fitur GetX untuk snackbar, dialog, route, dan state.",
       "Memahami root app untuk GetX."
     ],
-    detail: "`GetMaterialApp` adalah pintu masuk fitur GetX. Tanpa ini, beberapa fitur seperti navigation dan snackbar GetX tidak berjalan maksimal. Modul ini adalah gerbang ke semua materi GetX berikutnya.",
+    detail: "`GetMaterialApp` adalah gerbang utama jika kita ingin memanfaatkan seluruh ekosistem dan keajaiban GetX (seperti navigasi tanpa context, snackbar instan, dialog cepat, dan reactive state). Modul ini mengajarkan cara mengganti root widget `MaterialApp` bawaan menjadi `GetMaterialApp`.",
     concept: ["GetX", "GetMaterialApp", "Package get", "Root app"],
     snippet: `void main() {
   runApp(
@@ -1243,9 +1656,9 @@ flutter_launcher_icons:
   );
 }`,
     explanation: [
-      "`GetMaterialApp` menggantikan `MaterialApp`.",
-      "Fitur route/snackbar/dialog GetX siap dipakai.",
-      "Struktur page tetap menggunakan widget Flutter biasa."
+      "`GetMaterialApp` — Menggantikan `MaterialApp` standar untuk menyuntikkan pengelola navigasi dan Overlay global milik GetX.",
+      "Navigasi Tanpa Context — Setelah menggunakan `GetMaterialApp`, seluruh perintah navigasi dan dialog tidak lagi membutuhkan objek `BuildContext`.",
+      "Kompabilitas Penuh — Tetap mendukung penuh seluruh widget dasar Flutter bawaan tanpa ada yang rusak."
     ],
     exercise: ["Ubah title aplikasi.", "Tambahkan route sederhana.", "Coba panggil `Get.snackbar` dari tombol."],
     run: "flutter pub get\nflutter run"
@@ -1265,7 +1678,7 @@ flutter_launcher_icons:
       "Mengatur posisi snackbar.",
       "Membandingkan dengan ScaffoldMessenger."
     ],
-    detail: "GetX membuat feedback UI lebih ringkas karena tidak perlu mengambil `context`. Ini berguna saat logic ada di controller dan tetap ingin menampilkan pesan ke user.",
+    detail: "`Get.snackbar()` adalah cara ultra-ringkas untuk memunculkan pesan notifikasi indah melayang di layar tanpa memerlukan `BuildContext` atau `ScaffoldMessenger`. Sangat berguna saat dipanggil langsung dari kelas Controller (misalnya setelah sukses API login).",
     concept: ["Get.snackbar", "SnackPosition", "No context", "Feedback"],
     snippet: `Get.snackbar(
   "Berhasil",
@@ -1273,9 +1686,9 @@ flutter_launcher_icons:
   snackPosition: SnackPosition.BOTTOM,
 );`,
     explanation: [
-      "Parameter pertama adalah title.",
-      "Parameter kedua adalah message.",
-      "`snackPosition` mengatur posisi muncul."
+      "`Get.snackbar(title, message)` — Parameter pertama adalah Judul pesan, parameter kedua adalah Isi ringkasan pesan.",
+      "`snackPosition: SnackPosition.BOTTOM` — Menentukan lokasi munculnya pesan di tepi bawah layar (default berada di bagian atas `TOP`).",
+      "Tanpa BuildContext — Fungsi ini bisa dipanggil dari mana saja (bahkan di luar kelas Widget UI) tanpa perlu membawa parameter `context`."
     ],
     exercise: ["Buat snackbar error.", "Tambahkan icon.", "Panggil snackbar dari controller."],
     run: "flutter pub get\nflutter run"
@@ -1295,7 +1708,7 @@ flutter_launcher_icons:
       "Menutup dialog dengan `Get.back`.",
       "Memakai dialog untuk konfirmasi."
     ],
-    detail: "Dialog GetX membuat kode lebih pendek dan bisa dipanggil dari mana saja selama root app memakai `GetMaterialApp`. Ini cocok untuk flow delete, logout, atau konfirmasi submit.",
+    detail: "`Get.defaultDialog()` memotong kerumitan pembuatan `showDialog` standar Flutter. Cukup dalam satu panggilan fungsi sederhana, kita bisa menyusun judul, isi pesan, tombol konfirmasi ('Ya'), dan tombol pembatalan ('Batal') secara otomatis.",
     concept: ["Get.defaultDialog", "Get.back", "Confirm dialog", "No context"],
     snippet: `Get.defaultDialog(
   title: "Konfirmasi",
@@ -1305,9 +1718,9 @@ flutter_launcher_icons:
   onConfirm: () => Get.back(),
 );`,
     explanation: [
-      "`middleText` adalah isi pesan sederhana.",
-      "`onConfirm` berjalan saat tombol confirm ditekan.",
-      "`Get.back` menutup dialog."
+      "`title` & `middleText` — Mengatur teks judul pop-up dan teks pesan utama konfirmasi.",
+      "`textConfirm` & `textCancel` — Memberikan label otomatis untuk dua tombol aksi utama di bagian bawah dialog.",
+      "`onConfirm: () { Get.back(); }` — Eksekusi logika saat tombol konfirmasi ditekan, dan `Get.back()` otomatis menutup dialog tersebut."
     ],
     exercise: ["Tambahkan aksi delete setelah confirm.", "Ubah dialog menjadi custom content.", "Tampilkan snackbar setelah dialog ditutup."],
     run: "flutter pub get\nflutter run"
@@ -1327,7 +1740,7 @@ flutter_launcher_icons:
       "Menutup bottom sheet dengan `Get.back`.",
       "Membuat action menu cepat."
     ],
-    detail: "Sama seperti dialog dan snackbar GetX, bottom sheet bisa dipanggil tanpa context. Ini praktis untuk action menu yang logic-nya dipicu dari controller atau widget kecil.",
+    detail: "`Get.bottomSheet()` memungkinkan kita memunculkan lembaran panel modal dari tepi bawah layar hanya dengan satu baris kode ringkas, tanpa memerlukan objek `BuildContext`.",
     concept: ["Get.bottomSheet", "Bottom panel", "No context", "Action menu"],
     snippet: `Get.bottomSheet(
   Container(
@@ -1337,9 +1750,8 @@ flutter_launcher_icons:
   ),
 );`,
     explanation: [
-      "Isi bottom sheet tetap widget Flutter biasa.",
-      "`Get.bottomSheet` membuka panel dari bawah.",
-      "`Get.back` bisa dipakai untuk menutupnya."
+      "`Get.bottomSheet(Widget)` — Menerima widget custom apapun yang ingin ditampilkan di dalam lembaran panel bawah.",
+      "`Get.back()` — Perintah instan untuk menutup panel bottom sheet dari mana saja."
     ],
     exercise: ["Buat bottom sheet tema light/dark.", "Tambahkan list opsi.", "Panggil dari FloatingActionButton."],
     run: "flutter pub get\nflutter run"
@@ -1359,7 +1771,7 @@ flutter_launcher_icons:
       "Memanggil `update()` untuk rebuild.",
       "Membaca state dengan `GetBuilder`."
     ],
-    detail: "Simple state GetX cocok saat kamu ingin kontrol manual kapan UI rebuild. Tidak semua data harus reactive. Kadang update manual lebih hemat dan lebih mudah dipahami.",
+    detail: "Simple State Management pada GetX menggunakan `GetBuilder`. Berbeda dari `StatefulWidget` yang memicu rebuild seluruh widget, GetBuilder hanya memperbarui potongan widget spesifik yang dibungkus saja saat fungsi `update()` dipanggil manual di controller.",
     concept: ["GetxController", "GetBuilder", "update", "Manual state"],
     snippet: `class HomeController extends GetxController {
   var angka = 0;
@@ -1373,9 +1785,9 @@ flutter_launcher_icons:
   }
 }`,
     explanation: [
-      "`angka` adalah state biasa, belum reactive.",
-      "`tambah` mengubah data.",
-      "`update()` memberitahu `GetBuilder` agar rebuild."
+      "`GetxController` — Kelas pengontrol logika tempat menyimpan data state dan fungsi aksi aplikasi.",
+      "`update()` — Fungsi saklar manual yang memberitahu `GetBuilder` di UI untuk menggambar ulang tampilannya.",
+      "Performa Efisien — Sangat ringan karena tidak menggunakan Stream atau Observer, cocok untuk data statis yang jarang berubah."
     ],
     exercise: ["Panggil `update()` langsung di `tambah`.", "Tambahkan function reset.", "Bandingkan dengan `.obs` di modul berikutnya."],
     run: "flutter pub get\nflutter run"
@@ -1395,7 +1807,7 @@ flutter_launcher_icons:
       "Mengubah value reactive.",
       "Menampilkan state dengan `Obx`."
     ],
-    detail: "Reactive variable membuat UI yang memakai data tersebut rebuild otomatis saat value berubah. Ini cocok untuk counter, form state, selected item, loading, dan list hasil API.",
+    detail: "Reactive State Management (`Rx`) adalah keunggulan utama GetX. Cukup menambahkan `.obs` pada variabel (menjadikannya Observable), maka setiap kali nilai variabel tersebut berubah, seluruh widget yang dibungkus `Obx(...)` akan menggambar ulang tampilannya secara OTOMATIS tanpa perlu memanggil `setState` atau `update()`!",
     concept: [".obs", "RxInt", "RxString", "RxBool", "RxList", "Obx"],
     snippet: `class HomeController extends GetxController {
   RxInt dataInt = 0.obs;
@@ -1412,9 +1824,9 @@ flutter_launcher_icons:
   }
 }`,
     explanation: [
-      "`.obs` membuat data dipantau oleh GetX.",
-      "`Obx` rebuild otomatis saat data reactive berubah.",
-      "Untuk beberapa tipe, value diubah lewat `.value`."
+      "`.obs` — Mengubah variabel biasa menjadi variabel reaktif (Observable) yang dipantau oleh GetX.",
+      "`Obx(() => Text('${controller.dataInt}'))` — Widget pendengar yang akan merender ulang tampilannya secara instan begitu variabel `.obs` di dalamnya berubah.",
+      "Tanpa `setState()` — Mengeliminasi boilerplate code dan pemanggilan `setState` secara keseluruhan di layer View."
     ],
     exercise: ["Buat reactive loading.", "Buat selected category dengan `RxString`.", "Tampilkan list reactive dengan `Obx`."],
     run: "flutter pub get\nflutter run"
@@ -1434,7 +1846,7 @@ flutter_launcher_icons:
       "Menggunakan `debounce` untuk menunggu user berhenti mengetik.",
       "Menggunakan `interval` untuk membatasi frekuensi eksekusi."
     ],
-    detail: "Workers berguna saat perubahan state perlu memicu side effect, seperti request search API, validasi, analytics, atau log. `debounce` sangat penting agar API tidak terpanggil setiap huruf diketik.",
+    detail: "Workers di GetX adalah fungsi pendengar (Listener) yang memantau perubahan variabel `.obs` untuk memicu efek samping (Side Effect). Fitur ini sangat berguna untuk fitur pencarian (Search Input), simpan otomatis (Auto-Save), atau analitik tanpa mengotori logika UI.",
     concept: ["ever", "once", "debounce", "interval", "Side effect", "onInit"],
     snippet: `@override
 void onInit() {
@@ -1455,9 +1867,10 @@ void onInit() {
   super.onInit();
 }`,
     explanation: [
-      "`ever` berjalan setiap data berubah.",
-      "`debounce` menunggu perubahan berhenti selama durasi tertentu.",
-      "`interval` membatasi eksekusi per interval waktu."
+      "`ever(rx, callback)` — Menjalankan fungsi callback SETIAP KALI nilai variabel `rx` berubah.",
+      "`once(rx, callback)` — Hanya menjalankan fungsi callback SATU KALI SAJA saat variabel berubah pertama kali.",
+      "`debounce(rx, callback, time)` — Menunggu pengguna BERHENTI melakukan input selama rentang waktu tertentu (sangat penting untuk fitur Search Bar agar tidak menembak API setiap huruf diketik).",
+      "`interval(rx, callback, time)` — Mencegah aksi eksekusi berlebihan dengan membatasi eksekusi maksimum per jeda durasi."
     ],
     exercise: ["Buat search input dengan debounce.", "Tambahkan worker `once`.", "Cetak value terbaru setiap worker berjalan."],
     run: "flutter pub get\nflutter run"
@@ -1477,7 +1890,7 @@ void onInit() {
       "Mengambil controller dengan `Get.find`.",
       "Memakai controller yang sama di beberapa halaman."
     ],
-    detail: "Dependency management membuat object seperti controller tidak perlu dibuat manual di setiap widget. Ini membantu menjaga satu sumber data yang bisa dipakai lintas halaman.",
+    detail: "Dependency Management (Dependency Injection) di GetX memungkinkan kita mendaftarkan instance Controller ke memori global dan mengaksesnya di halaman mana pun hanya dengan memanggil `Get.find()`, tanpa perlu mengoper data controller lewat Constructor dari halaman ke halaman.",
     concept: ["Get.put", "Get.lazyPut", "Get.find", "Dependency injection", "Controller reuse"],
     snippet: `class PageSatu extends StatelessWidget {
   PageSatuController pageSatuC = Get.find();
@@ -1491,9 +1904,9 @@ void onInit() {
   }
 }`,
     explanation: [
-      "`Get.find()` mengambil controller yang sudah didaftarkan.",
-      "Controller bisa dipakai ulang tanpa mengirim lewat constructor.",
-      "Binding di modul berikutnya membuat proses pendaftaran lebih rapi."
+      "`Get.put(Controller())` — Langsung membuat dan menginisialisasi controller ke dalam memori aplikasi.",
+      "`Get.lazyPut(() => Controller())` — Hanya akan membuat instansiasi controller saat pertama kali dipanggil oleh UI (lebih menghemat RAM).",
+      "`Get.find<Controller>()` — Mengambil controller yang sudah terdaftar di memori tanpa perlu membuat objek baru."
     ],
     exercise: ["Daftarkan controller di `main.dart`.", "Ambil controller di dua page berbeda.", "Bandingkan `Get.put` dan `Get.lazyPut`."],
     run: "flutter pub get\nflutter run"
@@ -1513,17 +1926,17 @@ void onInit() {
       "Menggunakan `Get.offAll`.",
       "Kembali dengan `Get.back`."
     ],
-    detail: "GetX navigation memperpendek kode navigasi karena tidak perlu `Navigator.push(context, ...)`. Setiap method punya efek berbeda terhadap stack halaman.",
+    detail: "GetX Route Management menyederhanakan sistem navigasi Flutter secara drastis. Kita tidak lagi membutuhkan objek `BuildContext` atau penulisan panjang `Navigator.push(context, MaterialPageRoute(...))`. Cukup gunakan perintah ringkas seperti `Get.to()`, `Get.off()`, atau `Get.back()`.",
     concept: ["Get.to", "Get.off", "Get.offAll", "Get.back", "Navigation stack"],
     snippet: `Get.to(() => const Page1());
 Get.off(() => const Page2());
 Get.offAll(() => const Page3());
 Get.back();`,
     explanation: [
-      "`Get.to` menambah halaman baru.",
-      "`Get.off` mengganti halaman aktif.",
-      "`Get.offAll` membersihkan stack lalu membuka halaman baru.",
-      "`Get.back` kembali atau menutup overlay."
+      "`Get.to(() => Page())` — Membuka halaman baru (menumpuk di atas rute lama).",
+      "`Get.off(() => Page())` — Membuka halaman baru sambil MENGHAPUS halaman saat ini dari stack (misalnya perpindahan dari Splash Screen ke Login).",
+      "`Get.offAll(() => Page())` — MENGHAPUS SELURUH tumpukan halaman sebelumnya dan membuka halaman baru sebagai root (misalnya saat Logout kembali ke Login).",
+      "`Get.back()` — Menutup halaman/dialog/bottomsheet aktif dan kembali ke layar sebelumnya."
     ],
     exercise: ["Buat flow login ke home dengan `Get.offAll`.", "Kirim argument ke halaman tujuan.", "Coba kembali dengan `Get.back(result: data)`."],
     run: "flutter pub get\nflutter run"
@@ -1543,7 +1956,7 @@ Get.back();`,
       "Navigasi dengan `Get.toNamed`.",
       "Merapikan route yang makin banyak."
     ],
-    detail: "Named route membuat navigasi lebih terstruktur. Alih-alih membuat page langsung di banyak tempat, semua route dikumpulkan di satu daftar. Pola ini menjadi dasar struktur Get CLI.",
+    detail: "Menggunakan Named Routes (Navigasi Berbasis Nama String seperti `/home` atau `/login`) membuat pengelolaan rute aplikasi skala besar menjadi sangat terstruktur, bersih, dan mudah dikelola dari satu file pustaka rute pusat.",
     concept: ["GetPage", "initialRoute", "getPages", "Get.toNamed", "Route table"],
     snippet: `GetMaterialApp(
   initialRoute: "/",
@@ -1555,9 +1968,9 @@ Get.back();`,
 
 Get.toNamed("/page-1");`,
     explanation: [
-      "`getPages` berisi daftar route aplikasi.",
-      "`initialRoute` menentukan halaman pertama.",
-      "`Get.toNamed` membuka halaman berdasarkan nama route."
+      "`GetMaterialApp` — Pengganti `MaterialApp` standar bawaan Flutter yang mengaktifkan seluruh fitur canggih GetX.",
+      "`getPages: [...]` — Tabel pendaftaran seluruh nama rute halaman di aplikasi.",
+      "`Get.toNamed('/halaman')` — Membuka halaman tujuan berdasarkan String nama rutenya."
     ],
     exercise: ["Tambahkan route detail.", "Kirim parameter route.", "Buat konstanta untuk nama route agar tidak typo."],
     run: "flutter pub get\nflutter run"
@@ -1577,7 +1990,7 @@ Get.toNamed("/page-1");`,
       "Menghubungkan binding ke `GetPage`.",
       "Memisahkan dependency dari view."
     ],
-    detail: "Binding membuat route bertanggung jawab menyiapkan controller yang dibutuhkan halamannya. View jadi lebih bersih karena tidak perlu `Get.put` langsung di UI.",
+    detail: "`Bindings` memisahkan pendaftaran Controller dari kelas View (UI). Dengan Bindings, Controller baru akan didaftarkan ke RAM tepat saat rute halaman tersebut dibuka, dan secara otomatis dibuang (dispose) dari RAM saat penggunanya keluar dari halaman tersebut.",
     concept: ["Bindings", "dependencies", "Get.lazyPut", "GetPage binding", "Route scoped dependency"],
     snippet: `class CounterBinding extends Bindings {
   @override
@@ -1592,9 +2005,9 @@ GetPage(
   binding: CounterBinding(),
 );`,
     explanation: [
-      "`Bindings` adalah class khusus untuk mendaftarkan dependency.",
-      "`Get.lazyPut` membuat controller saat dibutuhkan.",
-      "Binding dihubungkan ke route lewat property `binding`."
+      "`class CounterBinding extends Bindings` — Kelas khusus wadah pendaftaran seluruh controller yang dibutuhkan oleh suatu halaman.",
+      "`binding: CounterBinding()` — Menghubungkan file Binding ke rute `GetPage`.",
+      "Manfaat Utama — Menjaga file UI (View) tetap murni 100% berisi kode tampilan tanpa adanya penginstansiasian controller secara manual."
     ],
     exercise: ["Tambahkan controller kedua di binding.", "Pindahkan `Get.put` dari view ke binding.", "Bandingkan lifecycle controller dengan dan tanpa binding."],
     run: "flutter pub get\nflutter run"
@@ -1614,7 +2027,7 @@ GetPage(
       "Membaca data dengan `read`.",
       "Menghapus data dengan `remove`."
     ],
-    detail: "GetStorage cocok untuk data kecil seperti remember login, cache ringan, dan theme mode. Untuk data sensitif, jangan menyimpan password plain text di app nyata; gunakan storage aman dan mekanisme auth yang benar.",
+    detail: "`GetStorage` adalah pustaka penyimpanan lokal (Local Key-Value Storage) super cepat dan efisien. Sangat ideal untuk menyimpan data kecil seperti status 'Ingat Saya' (Remember Me), token autentikasi, status Dark Mode, atau pengaturan preferensi pengguna.",
     concept: ["GetStorage.init", "write", "read", "remove", "Remember login", "Local cache"],
     snippet: `void main() async {
   await GetStorage.init();
@@ -1630,9 +2043,10 @@ box.write("dataRemember", {
 
 box.remove("dataRemember");`,
     explanation: [
-      "`GetStorage.init()` wajib sebelum storage dipakai.",
-      "`write` menyimpan data lokal.",
-      "`remove` menghapus key tertentu."
+      "`await GetStorage.init()` — Proses inisialisasi awal driver memori lokal sebelum `runApp` dipanggil.",
+      "`box.write('key', data)` — Menyimpan data ke memori HP berbasis pasangan Key-Value.",
+      "`box.read('key')` — Membaca data tersimpan berdasarkan nama Key-nya.",
+      "`box.remove('key')` — Menghapus data spesifik saat logout atau reset."
     ],
     exercise: ["Simpan status dark mode.", "Baca data remember saat halaman login dibuka.", "Hapus data saat logout."],
     run: "flutter pub get\nflutter run"
@@ -1652,7 +2066,7 @@ box.remove("dataRemember");`,
       "Melihat route di `app_pages.dart` dan `app_routes.dart`.",
       "Menyiapkan struktur yang lebih scalable."
     ],
-    detail: "Get CLI membantu membuat struktur project modular. Setiap fitur punya folder sendiri, sehingga app lebih mudah dirawat saat halaman dan controller makin banyak.",
+    detail: "`Get CLI` adalah alat Command Line Interface bawaan GetX yang secara otomatis memotong dan merapikan arsitektur project Flutter ke dalam pola Modul (`modules`). Setiap fitur (misalnya Module Home, Module Login) diisolasi memiliki folder `bindings/`, `controllers/`, dan `views/` tersendiri.",
     concept: ["Get CLI", "Modules", "Bindings", "Controllers", "Views", "Routes"],
     snippet: `GetMaterialApp(
   debugShowCheckedModeBanner: false,
@@ -1661,9 +2075,9 @@ box.remove("dataRemember");`,
   getPages: AppPages.routes,
 );`,
     explanation: [
-      "`AppPages.INITIAL` menentukan route awal.",
-      "`AppPages.routes` berisi semua route hasil struktur Get CLI.",
-      "Setiap module biasanya memiliki binding, controller, dan view."
+      "Struktur Modular — Memisahkan kode berdasarkan Fitur/Modul sehingga ketika tim berkembang, pengerjaan tidak akan saling bertabrakan.",
+      "`AppPages.routes` — Seluruh daftar rute dikumpulkan teratur di folder `app/routes/`.",
+      "Pola Standar Industri — Menjadi standar arsitektur profesional bagi pengembang aplikasi Flutter berbasis GetX."
     ],
     exercise: ["Tambahkan module baru.", "Tambahkan route baru.", "Pindahkan logic halaman ke controller."],
     run: "flutter pub get\nflutter run"
@@ -1683,7 +2097,7 @@ box.remove("dataRemember");`,
       "Mengirim API key placeholder lewat header.",
       "Parsing response ke model."
     ],
-    detail: "Modul ini mulai memisahkan layer data. Provider menangani request, model menangani bentuk data, controller menjadi jembatan, dan view fokus ke tampilan.",
+    detail: "Modul ini melengkapi arsitektur Get CLI dengan menambahkan Lapisan Data (`app/data/`). `Provider` bertugas mengambil data dari API, `Model` mengonversi JSON menjadi Objek Dart, `Controller` memproses logika bisnis, dan `View` murni menampilkan UI.",
     concept: ["GetConnect", "Provider", "Model", "Base URL", "Header", "API key placeholder"],
     snippet: `class UserProvider extends GetConnect {
   @override
@@ -1705,9 +2119,9 @@ box.remove("dataRemember");`,
   }
 }`,
     explanation: [
-      "`GetConnect` menyediakan method `get`, `post`, dan client config.",
-      "`baseUrl` membuat request cukup memakai path.",
-      "`API-KEY-KAMU` adalah placeholder agar key asli tidak bocor ke GitHub."
+      "`GetConnect` — Modul HTTP bawaan GetX yang ringkas tanpa memerlukan package eksternal `http`.",
+      "`httpClient.baseUrl` — Mengatur URL domain utama backend sehingga pemanggilan endpoint cukup menuliskan path sisa (`/api/users`).",
+      "`addRequestModifier` — Menyisipkan header atau API Key secara otomatis ke setiap request jaringannya."
     ],
     exercise: ["Tambahkan method create user.", "Tampilkan loading di view.", "Tangani response error dengan snackbar."],
     run: "flutter pub get\nflutter run"
@@ -1728,7 +2142,7 @@ box.remove("dataRemember");`,
       "Menampilkan loading state terpisah.",
       "Mengirim request ongkir dengan body dan header API key placeholder."
     ],
-    detail: "Ini modul puncak yang menggabungkan banyak konsep: API, dropdown dependent, state reactive, provider, model, loading, dan struktur Get CLI. Alurnya mirip fitur produksi: user pilih asal, tujuan, kurir, berat, lalu aplikasi meminta hasil biaya kirim.",
+    detail: "Studi Kasus Puncak! Di sini kamu membangun aplikasi Cek Ongkos Kirim riil menggunakan API RajaOngkir. Menggabungkan seluruh konsep yang dipelajari: Arsitektur Get CLI, Provider `GetConnect`, Objek Model, Reactive State (`Rxn`, `assignAll`), Dropdown saling tergantung (Dependent Dropdown), dan indikator Loading.",
     concept: ["Model", "Provider", "Get.find", "RxList", "Rxn", "assignAll", "Loading state", "POST request"],
     snippet: `class HomeController extends GetxController {
   final ProvinceProvider provinceProvider = Get.find();
@@ -1753,10 +2167,9 @@ box.remove("dataRemember");`,
   }
 }`,
     explanation: [
-      "`Get.find()` mengambil provider yang sudah didaftarkan binding.",
-      "`Rxn<Province>()` dipakai karena pilihan awal boleh null.",
-      "`assignAll` mengganti isi list reactive dengan hasil API.",
-      "`finally` memastikan loading dimatikan meskipun request error."
+      "`Rxn<Province>()` — Variabel reaktif nullable yang cocok untuk menampung opsi Dropdown yang awalnya kosong.",
+      "`provinceList.assignAll(result)` — Memperbarui seluruh isi list reaktif sekaligus dan memicu pembaruan UI secara instan.",
+      "`try ... finally` — Blok penanganan yang menjamin status `isLoading` akan selalu dimatikan kembali, baik saat data sukses diunduh maupun saat terjadi kegagalan jaringan."
     ],
     exercise: ["Validasi semua dropdown sebelum cek ongkir.", "Tambahkan error snackbar jika request gagal.", "Pisahkan constant API key dan base URL ke file config."],
     run: "flutter pub get\nflutter run"
@@ -1776,7 +2189,7 @@ box.remove("dataRemember");`,
       "Membuat style aplikasi lebih konsisten.",
       "Menyiapkan pondasi light/dark theme."
     ],
-    detail: "Theme global membuat tampilan aplikasi lebih konsisten. Daripada menyebar warna di banyak file, warna utama dan konfigurasi style sebaiknya dipusatkan agar mudah dirawat.",
+    detail: "Manajemen Warna dan Tema Global. Daripada menuliskan kode warna secara acak (`Colors.blue`, `Color(0xFF123456)`) di setiap file UI yang membuat aplikasi tidak konsisten, modul ini mengajarkan memusatkan seluruh tema warna ke dalam `app/constant/color.dart` dan `ThemeData`.",
     concept: ["ThemeData", "Constant color", "GetMaterialApp theme", "Design consistency"],
     snippet: `GetMaterialApp(
   theme: Light,
@@ -1786,9 +2199,9 @@ box.remove("dataRemember");`,
   getPages: AppPages.routes,
 );`,
     explanation: [
-      "`theme: Light` menerapkan konfigurasi theme global.",
-      "Constant color membuat warna tidak tersebar acak.",
-      "Pola ini bisa dikembangkan menjadi dark mode."
+      "Konsistensi Desain — Mengubah warna utama aplikasi di satu file constant otomatis akan mengubah warna di seluruh layar aplikasi.",
+      "`ThemeData` — Menyediakan tema standar untuk warna tombol, font, background, dan kustomisasi Dark Mode.",
+      "Kerapihan Kode — Menjadikan kode produksi siap dipelihara dan mudah dikembangkan untuk jangka panjang."
     ],
     exercise: ["Buat `Dark` theme.", "Tambahkan tombol ganti theme.", "Simpan pilihan theme dengan GetStorage."],
     run: "flutter pub get\nflutter run"
@@ -1912,6 +2325,7 @@ function renderSidebar() {
 
 function renderToc() {
   const toc = $("#toc");
+  const module = state.current;
   const sections = [
     ["overview", "Overview"],
     ["target", "Target Belajar"],
@@ -1920,9 +2334,15 @@ function renderToc() {
     ["concepts", "Konsep"],
     ["code", "Highlight Kode"],
     ["source-files", "Source Files"],
-    ["exercise", "Latihan"],
-    ["run", "Cara Run"]
   ];
+  if (module.deepDive && module.deepDive.length) {
+    sections.push(["deep-dive", "Deep Dive"]);
+    module.deepDive.forEach((section, i) => {
+      sections.push([`deep-dive-${i}`, section.title]);
+    });
+  }
+  sections.push(["exercise", "Latihan"]);
+  sections.push(["run", "Cara Run"]);
   toc.innerHTML = sections.map(([id, label]) => `
     <a href="#${id}" class="toc-link block border-l-2 border-white/10 py-1.5 pl-3 text-sm font-semibold text-slate-500 transition hover:border-cyan-300 hover:text-cyan-200">${label}</a>
   `).join("");
@@ -2044,6 +2464,158 @@ function bindCodeFileTabs(module) {
   });
 }
 
+function renderDeepDive(module) {
+  if (!module.deepDive || !module.deepDive.length) return '';
+
+  const colorMap = {
+    cyan: { border: 'border-cyan-400/20', bg: 'bg-cyan-400/10', text: 'text-cyan-200', dot: 'bg-cyan-300' },
+    emerald: { border: 'border-emerald-400/20', bg: 'bg-emerald-400/10', text: 'text-emerald-200', dot: 'bg-emerald-300' },
+    violet: { border: 'border-violet-400/20', bg: 'bg-violet-400/10', text: 'text-violet-200', dot: 'bg-violet-300' },
+    amber: { border: 'border-amber-400/20', bg: 'bg-amber-400/10', text: 'text-amber-200', dot: 'bg-amber-300' },
+    slate: { border: 'border-white/10', bg: 'bg-white/[0.04]', text: 'text-slate-300', dot: 'bg-slate-400' },
+  };
+
+  function getColor(c) { return colorMap[c] || colorMap.slate; }
+
+  const sections = module.deepDive.map((section, idx) => {
+    let content = '';
+
+    if (section.type === 'folder-tree' || section.type === 'folder-tree-mini' || section.type === 'widget-tree') {
+      content = `
+        <pre class="docs-code overflow-x-auto rounded-xl bg-[#050816] p-5 text-sm leading-7 text-emerald-200"><code>${escapeHtml(section.tree)}</code></pre>
+        ${section.items ? `
+          <div class="mt-5 grid gap-3">
+            ${section.items.map(item => {
+        const c = getColor(item.color);
+        return `
+                <div class="rounded-xl border ${c.border} ${c.bg} p-4">
+                  <div class="flex items-center gap-2.5">
+                    <i data-lucide="${item.icon}" class="w-5 h-5 ${c.text}"></i>
+                    <code class="text-sm font-bold ${c.text}">${escapeHtml(item.name)}</code>
+                  </div>
+                  <p class="mt-2 text-sm leading-7 text-slate-300">${markdownInline(item.detail)}</p>
+                </div>
+              `;
+      }).join('')}
+          </div>
+        ` : ''}
+      `;
+    }
+
+    else if (section.type === 'code-explain') {
+      content = `
+        <pre class="docs-code overflow-x-auto rounded-xl bg-[#050816] p-5 text-sm leading-7"><code class="language-${section.language || 'dart'}">${escapeHtml(section.code)}</code></pre>
+        ${section.codeExplanation ? `
+          <ul class="mt-5 grid gap-3">
+            ${section.codeExplanation.map(item => `
+              <li class="flex gap-3 text-sm leading-7 text-slate-300">
+                <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-emerald-300"></span>
+                <span>${markdownInline(item)}</span>
+              </li>
+            `).join('')}
+          </ul>
+        ` : ''}
+      `;
+    }
+
+    else if (section.type === 'symbol-table') {
+      content = `
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-white/10">
+                <th class="px-4 py-3 text-left font-bold text-slate-400">Simbol</th>
+                <th class="px-4 py-3 text-left font-bold text-slate-400">Nama</th>
+                <th class="px-4 py-3 text-left font-bold text-slate-400">Kegunaan</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${section.symbols.map((sym, i) => `
+                <tr class="border-b border-white/[0.06] ${i % 2 === 0 ? 'bg-white/[0.02]' : ''}">
+                  <td class="px-4 py-3"><code class="rounded bg-cyan-400/15 px-2 py-1 text-sm font-bold text-cyan-200">${escapeHtml(sym.symbol)}</code></td>
+                  <td class="px-4 py-3 font-semibold text-slate-200">${escapeHtml(sym.name)}</td>
+                  <td class="px-4 py-3 leading-6 text-slate-300">${markdownInline(sym.usage)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    else if (section.type === 'comparison') {
+      const lc = getColor(section.left.color);
+      const rc = getColor(section.right.color);
+      content = `
+        <div class="grid gap-4 lg:grid-cols-2">
+          <div class="rounded-xl border ${lc.border} ${lc.bg} p-5">
+            <h4 class="text-lg font-bold ${lc.text}">${escapeHtml(section.left.title)}</h4>
+            <ul class="mt-3 grid gap-2">
+              ${section.left.points.map(p => `
+                <li class="flex gap-2 text-sm leading-7 text-slate-300">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full ${lc.dot}"></span>
+                  <span>${markdownInline(p)}</span>
+                </li>
+              `).join('')}
+            </ul>
+            <pre class="docs-code mt-4 overflow-x-auto rounded-lg bg-[#050816] p-4 text-sm leading-7"><code class="language-dart">${escapeHtml(section.left.code)}</code></pre>
+          </div>
+          <div class="rounded-xl border ${rc.border} ${rc.bg} p-5">
+            <h4 class="text-lg font-bold ${rc.text}">${escapeHtml(section.right.title)}</h4>
+            <ul class="mt-3 grid gap-2">
+              ${section.right.points.map(p => `
+                <li class="flex gap-2 text-sm leading-7 text-slate-300">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full ${rc.dot}"></span>
+                  <span>${markdownInline(p)}</span>
+                </li>
+              `).join('')}
+            </ul>
+            <pre class="docs-code mt-4 overflow-x-auto rounded-lg bg-[#050816] p-4 text-sm leading-7"><code class="language-dart">${escapeHtml(section.right.code)}</code></pre>
+          </div>
+        </div>
+      `;
+    }
+
+    else if (section.type === 'flow') {
+      content = `
+        <div class="grid gap-3">
+          ${section.steps.map((s, i) => `
+            <div class="flex items-start gap-4">
+              <div class="flex flex-col items-center">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/20 to-violet-400/20 text-sm font-bold text-cyan-200 shadow-lg shadow-cyan-900/20">${s.step}</span>
+                ${i < section.steps.length - 1 ? '<div class="mt-1 h-full w-px bg-gradient-to-b from-cyan-400/30 to-transparent" style="min-height:24px"></div>' : ''}
+              </div>
+              <div class="pb-4">
+                <p class="text-base font-bold text-white">${markdownInline(s.label)}</p>
+                <p class="mt-1 text-sm leading-7 text-slate-400">${markdownInline(s.detail)}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    return `
+      <section id="deep-dive-${idx}" class="lesson-card mt-6 rounded-2xl p-5 sm:p-6">
+        <h2 class="text-xl font-semibold text-white">${escapeHtml(section.title)}</h2>
+        <p class="mt-2 text-sm leading-7 text-slate-400">${markdownInline(section.description)}</p>
+        <div class="mt-5">${content}</div>
+      </section>
+    `;
+  });
+
+  return `
+    <div id="deep-dive" class="mt-8">
+      <div class="mb-4 flex items-center gap-3">
+        <div class="h-px flex-1 bg-gradient-to-r from-cyan-400/30 to-transparent"></div>
+        <span class="rounded-lg border border-cyan-400/20 bg-cyan-400/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">Deep Dive</span>
+        <div class="h-px flex-1 bg-gradient-to-l from-violet-400/30 to-transparent"></div>
+      </div>
+      ${sections.join('')}
+    </div>
+  `;
+}
+
 function renderContent() {
   const module = state.current;
   $("#breadcrumb").innerHTML = `
@@ -2117,6 +2689,8 @@ function renderContent() {
 
     ${renderCodeFiles(module)}
 
+    ${renderDeepDive(module)}
+
     <section id="exercise" class="lesson-card mt-6 rounded-2xl p-5 sm:p-6">
       <h2 class="text-xl font-semibold text-white">Latihan Lanjutan</h2>
       <div class="mt-4 grid gap-3">
@@ -2151,6 +2725,7 @@ ${escapeHtml(module.run)}</code></pre>
   renderToc();
   updatePrevNext();
   if (window.Prism) Prism.highlightAllUnder($("#lesson"));
+  if (window.lucide) lucide.createIcons();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
