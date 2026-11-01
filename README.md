@@ -18,13 +18,13 @@ npm run docs:build
 npm run docs:preview
 ```
 
-Hasil build ada di `docs/.vitepress/dist/`.
+Source VitePress berada di `site/`; hasil build statis berada di `docs/`.
 
 ## Deploy manual ke GitHub Pages
 
-Dokumentasi dideploy secara manual dari komputer lokal. Branch `main` hanya menyimpan source; branch `gh-pages` hanya menyimpan hasil HTML statis.
+Dokumentasi dideploy secara manual dari komputer lokal dan semuanya berada di branch `main`. Folder `site/` menyimpan source VitePress, sedangkan folder `docs/` menyimpan HTML siap tampil.
 
-Satu kali saja, buka **GitHub → repository → Settings → Pages**, pilih **Deploy from a branch**, lalu pilih branch `gh-pages` dan folder `/(root)`.
+Satu kali saja, buka **GitHub → repository → Settings → Pages**, pilih **Deploy from a branch**, lalu pilih branch `main` dan folder `/docs`.
 
 Setiap ada perubahan materi:
 
@@ -32,7 +32,15 @@ Setiap ada perubahan materi:
 npm run docs:deploy
 ```
 
-Perintah tersebut membuat build dengan base URL `/flutter-web-docs/`, lalu mengirim isi `docs/.vitepress/dist/` ke branch `gh-pages`. Pada pemakaian pertama, `npx` mengunduh utilitas deploy sementara. Token GitHub biasa dengan izin menulis repository sudah cukup; tidak memerlukan izin `workflow`.
+Perintah tersebut membuat build dengan base URL `/flutter-web-docs/` ke folder `docs/`. Setelah itu commit dan push perubahan source serta hasil build seperti biasa:
+
+```bash
+git add site docs
+git commit -m "Update documentation"
+git push origin main
+```
+
+GitHub Pages akan menerbitkan folder `docs/` dari branch `main`; tidak ada workflow atau branch deployment terpisah.
 
 ## Sumber materi
 
@@ -40,7 +48,7 @@ Perintah tersebut membuat build dengan base URL `/flutter-web-docs/`, lalu mengi
 - `assets/code-data.js` — 218 snapshot source code dan 92 link package Beginner Track.
 - `assets/intermediate-data.js` — 19 modul Intermediate/Advanced Track, 173 snapshot source, serta 48 link package dari folder latihan intermediate.
 - `tools/build-vitepress-content.mjs` — mengubah semua sumber materi menjadi halaman Markdown dan sidebar VitePress.
-- `docs/guide/` — halaman hasil generate yang siap dicari, dinavigasi, dan di-render VitePress.
+- `site/guide/` — halaman hasil generate yang siap dicari, dinavigasi, dan di-render VitePress.
 
 Jalankan ini bila metadata atau snapshot source berubah:
 

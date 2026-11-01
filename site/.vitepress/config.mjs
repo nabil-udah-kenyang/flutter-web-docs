@@ -4,8 +4,11 @@ import { sidebar } from "./course-meta.mjs";
 
 export default defineConfig({
   // GitHub Pages project site berada pada /flutter-web-docs/.
-  // Lokal tetap di root; workflow deploy mengisi DOCS_BASE.
+  // Lokal tetap di root; perintah build Pages mengisi DOCS_BASE.
   base: process.env.DOCS_BASE || "/",
+  // Output ini dilacak di main agar GitHub Pages dapat menerbitkan /docs
+  // tanpa branch deployment terpisah.
+  outDir: resolve(import.meta.dirname, "../../docs"),
   title: "Dart & Flutter Beginner",
   description: "Dokumentasi latihan Dart, Flutter, API, GetX, dan studi kasus.",
   lang: "id-ID",

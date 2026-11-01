@@ -3,8 +3,8 @@ import { resolve } from "node:path";
 import vm from "node:vm";
 
 const root = resolve(import.meta.dirname, "..");
-const guideDir = resolve(root, "docs/guide");
-const metaFile = resolve(root, "docs/.vitepress/course-meta.mjs");
+const guideDir = resolve(root, "site/guide");
+const metaFile = resolve(root, "site/.vitepress/course-meta.mjs");
 const manualGuides = new Set(["backend-native.md"]);
 
 const readModules = async () => {
