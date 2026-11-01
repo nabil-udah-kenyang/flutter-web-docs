@@ -1,0 +1,427 @@
+:root {
+  /* Gunakan seluruh lebar layar; default VitePress membatasi layout di 1440px. */
+  --vp-layout-max-width: 100%;
+  --vp-c-brand-1: #06b6d4;
+  --vp-c-brand-2: #22d3ee;
+  --vp-c-brand-3: #67e8f9;
+  --vp-c-brand-soft: rgba(34, 211, 238, 0.16);
+  --vp-home-hero-name-color: #67e8f9;
+  --vp-home-hero-name-background: none;
+  --vp-home-hero-image-background-image: none;
+  --vp-home-hero-image-filter: none;
+}
+
+.dark {
+  --vp-c-bg: #070b14;
+  --vp-c-bg-alt: #0b1020;
+  --vp-c-bg-elv: #10182b;
+  --vp-c-bg-soft: #172137;
+  --vp-c-border: rgba(148, 163, 184, 0.18);
+  --vp-c-divider: rgba(148, 163, 184, 0.14);
+}
+
+/* Home: restrained grid texture and a calm editorial hierarchy. */
+.VPHome {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--vp-c-bg);
+  box-shadow: inset 0 72px 96px rgba(6, 182, 212, 0.035);
+}
+
+.VPHome::before {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: 620px;
+  background-image:
+    linear-gradient(rgba(125, 211, 252, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  content: "";
+  mask-image: linear-gradient(to bottom, black 0%, transparent 92%);
+  pointer-events: none;
+}
+
+.VPHome > * {
+  position: relative;
+  z-index: 1;
+}
+
+.VPHomeHero {
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 56px !important;
+}
+
+.VPHomeHero .container,
+.VPHomeFeatures .container {
+  max-width: 1104px !important;
+}
+
+.VPHomeHero .name {
+  letter-spacing: 0.14em !important;
+  line-height: 1.4 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+}
+
+.VPHomeHero .name.clip {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.VPHomeHero .text {
+  margin-top: 8px !important;
+  max-width: 640px !important;
+  color: var(--vp-c-text-1);
+  letter-spacing: -0.045em !important;
+  line-height: 1.04 !important;
+  font-size: clamp(40px, 5vw, 64px) !important;
+}
+
+.VPHomeHero .tagline {
+  padding-top: 20px !important;
+  max-width: 550px !important;
+  line-height: 1.7 !important;
+  font-size: 17px !important;
+  font-weight: 450 !important;
+}
+
+.VPHomeHero .actions {
+  padding-top: 28px !important;
+}
+
+.VPHomeHero .VPButton {
+  border-radius: 8px !important;
+  padding: 0 16px !important;
+  line-height: 36px !important;
+  font-size: 13px !important;
+}
+
+.VPHomeHero .VPButton.brand {
+  border-color: #31549b;
+  color: #f8fafc;
+  background-color: #1e3a8a;
+  box-shadow: none;
+}
+
+.VPHomeHero .VPButton.brand:hover {
+  border-color: #3b5faa;
+  color: #ffffff;
+  background-color: #274c9a;
+}
+
+.VPHomeHero .VPButton.alt {
+  border-color: rgba(148, 163, 184, 0.26);
+  color: #e2e8f0;
+  background-color: rgba(51, 65, 85, 0.82);
+}
+
+.VPHomeHero .VPButton.alt:hover {
+  border-color: rgba(103, 232, 249, 0.35);
+  color: #f8fafc;
+  background-color: #334155;
+}
+
+.VPHomeHero .image-bg {
+  display: none;
+}
+
+.VPHomeHero .image-container {
+  display: grid !important;
+  place-items: center;
+  width: 232px !important;
+  height: 232px !important;
+  border: 1px solid rgba(103, 232, 249, 0.16);
+  border-radius: 18px;
+  background: rgba(9, 18, 36, 0.56);
+  box-shadow: 16px 16px 0 rgba(103, 232, 249, 0.04);
+  transform: none !important;
+}
+
+.VPHomeHero .image-src {
+  position: static !important;
+  max-width: 196px !important;
+  max-height: 196px !important;
+  border-radius: 12px;
+  box-shadow: none;
+  transform: none !important;
+}
+
+.VPHomeFeatures {
+  margin-top: 8px;
+}
+
+.VPFeature {
+  border-color: var(--vp-c-divider);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.48);
+  box-shadow: none;
+}
+
+.VPFeature:hover {
+  border-color: rgba(103, 232, 249, 0.32);
+  background: rgba(15, 23, 42, 0.68);
+}
+
+.VPFeature .icon {
+  color: var(--vp-c-brand-1);
+}
+
+.VPFeature .icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+}
+
+.VPFeature .box {
+  padding: 22px;
+}
+
+.VPFeature .icon {
+  margin-bottom: 16px;
+  border: 1px solid rgba(103, 232, 249, 0.12);
+  border-radius: 8px;
+  background: rgba(6, 182, 212, 0.07);
+}
+
+.VPFeature .title {
+  letter-spacing: -0.01em;
+}
+
+.VPFeature .details {
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.home-guide {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 72px;
+  margin: 76px 0 8px;
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 32px;
+}
+
+.home-guide-intro h2 {
+  margin: 10px 0 14px;
+  border: 0;
+  padding: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.22;
+  font-size: 27px;
+}
+
+.home-guide-intro p:not(.home-kicker) {
+  max-width: 490px;
+  color: var(--vp-c-text-2);
+  line-height: 1.75;
+}
+
+.home-kicker {
+  margin: 0;
+  color: var(--vp-c-brand-1);
+  letter-spacing: 0.13em;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.home-path {
+  display: grid;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.home-path li {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 16px;
+  align-items: start;
+  border-top: 1px solid var(--vp-c-divider);
+  padding: 16px 0;
+}
+
+.home-path li:last-child {
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.home-path span {
+  color: var(--vp-c-brand-1);
+  font-family: var(--vp-font-family-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.home-path strong,
+.home-path small {
+  display: block;
+}
+
+.home-path strong {
+  font-size: 15px;
+}
+
+.home-path small {
+  margin-top: 4px;
+  color: var(--vp-c-text-2);
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+@media (max-width: 959px) {
+  .VPHomeHero .image {
+    display: none;
+  }
+
+  .VPHomeHero {
+    padding-top: calc(var(--vp-nav-height) + 64px) !important;
+  }
+
+  .home-guide {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 52px;
+  }
+}
+
+@media (max-width: 639px) {
+  .VPHomeHero {
+    padding-right: 24px !important;
+    padding-left: 24px !important;
+  }
+
+  .VPHomeHero .text {
+    font-size: 40px !important;
+  }
+
+  .VPHomeFeatures {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+
+.vp-doc h2 {
+  border-top-color: rgba(148, 163, 184, 0.2);
+}
+
+.vp-doc details {
+  border-color: rgba(34, 211, 238, 0.2);
+  background: rgba(15, 23, 42, 0.6);
+}
+
+/* Reading scale: closer to the relaxed desktop scale used by Laravel Docs. */
+.VPDoc .vp-doc {
+  font-size: 17px;
+}
+
+.VPDoc .vp-doc p,
+.VPDoc .vp-doc li,
+.VPDoc .vp-doc summary {
+  line-height: 1.78;
+}
+
+.VPDoc .vp-doc h1 {
+  line-height: 1.2;
+  font-size: 34px;
+}
+
+.VPDoc .vp-doc h2 {
+  line-height: 1.3;
+  font-size: 27px;
+}
+
+.VPDoc .vp-doc h3 {
+  line-height: 1.35;
+  font-size: 21px;
+}
+
+.VPDoc .vp-doc h4 {
+  line-height: 1.4;
+  font-size: 18px;
+}
+
+.VPDoc .vp-doc th,
+.VPDoc .vp-doc td {
+  font-size: 15px;
+}
+
+/* Code blocks: roomy gutter, stable line references, and a calm dark canvas. */
+.VPDoc .vp-doc div[class*="language-"] {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+  background-color: #20232b;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.VPDoc .vp-doc div[class*="language-"].line-numbers-mode {
+  padding-left: 56px;
+}
+
+.VPDoc .vp-doc .line-numbers-wrapper {
+  border-right-color: rgba(148, 163, 184, 0.2);
+  padding-top: 20px;
+  width: 56px;
+  background-color: rgba(2, 6, 23, 0.22);
+  color: #7e879b;
+}
+
+.VPDoc .vp-doc [class*="language-"] pre {
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.VPSidebarItem .text {
+  line-height: 26px !important;
+  font-size: 15px !important;
+}
+
+.VPDocAsideOutline .outline-title {
+  font-size: 15px !important;
+}
+
+.VPDocAsideOutline .outline-link {
+  line-height: 34px !important;
+  font-size: 15px !important;
+}
+
+@media (min-width: 960px) {
+  .VPDoc .vp-doc {
+    font-size: 18px;
+  }
+
+  .VPDoc .vp-doc h1 {
+    font-size: 38px;
+  }
+
+  .VPDoc .vp-doc h2 {
+    font-size: 29px;
+  }
+
+  .VPDoc .vp-doc h3 {
+    font-size: 22px;
+  }
+
+  .VPDoc .vp-doc th,
+  .VPDoc .vp-doc td {
+    font-size: 16px;
+  }
+
+  .VPNavBarMenuLink {
+    font-size: 15px !important;
+  }
+}
+
+/*
+ * Pada layar lebar VitePress membatasi artikel yang punya outline menjadi
+ * 688px. Itu bagus untuk artikel pendek, tetapi kurang nyaman untuk source
+ * Flutter yang panjang. Biarkan artikel mengisi ruang di antara sidebar dan
+ * daftar isi; outline tetap dipertahankan di sisi kanan.
+ */
+@media (min-width: 1280px) {
+  .VPDoc.has-aside .content-container {
+    width: 100%;
+    max-width: none !important;
+  }
+}

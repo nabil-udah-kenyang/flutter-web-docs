@@ -11,12 +11,29 @@ EXCLUDED_DIRS = {
     ".git",
     ".dart_tool",
     "build",
-    "android",
-    "ios",
-    "macos",
-    "windows",
-    "linux",
-    "web",
+}
+
+NATIVE_ROOTS = {"android", "ios", "macos", "windows", "linux", "web"}
+
+# Hanya file konfigurasi/entry point yang perlu dipelajari. Output build dan
+# file proyek yang sangat besar tetap tidak masuk ke dokumentasi.
+NATIVE_SUFFIXES = {
+    ".dart",
+    ".gradle",
+    ".kts",
+    ".java",
+    ".kt",
+    ".swift",
+    ".m",
+    ".mm",
+    ".h",
+    ".xml",
+    ".plist",
+    ".properties",
+    ".json",
+    ".html",
+    ".yaml",
+    ".yml",
 }
 
 PACKAGE_SKIP = {
@@ -25,9 +42,20 @@ PACKAGE_SKIP = {
     "flutter_lints",
 }
 
+SENSITIVE_NAME = r"(?:api[_-]?key|secret|token|client[_-]?secret|password)"
+REDACTED = "API-KEY-KAMU"
+
 
 def file_purpose(path: str) -> str:
     low = path.lower()
+    if "androidmanifest.xml" in low:
+        return "Konfigurasi Android: permission, activity, intent filter, dan metadata aplikasi."
+    if low.endswith(("build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts")):
+        return "Konfigurasi build native Android/Gradle: SDK, plugin, dependency, dan module project."
+    if low.endswith(("info.plist", "podfile")):
+        return "Konfigurasi native iOS: metadata app, permission, atau dependency CocoaPods."
+    if low.endswith(("appdelegate.swift", "mainactivity.kt", "mainactivity.java")):
+        return "Entry point native platform yang menghubungkan Flutter dengan Android atau iOS."
     if path == "pubspec.yaml":
         return "Konfigurasi project Flutter: nama package, dependency, asset, dan tool generator."
     if path.endswith("main.dart"):
@@ -62,28 +90,62 @@ def language(path: str) -> str:
         return "yaml"
     if path.endswith(".json"):
         return "json"
+    if path.endswith((".xml", ".html")):
+        return "xml"
+    if path.endswith((".gradle", ".properties")):
+        return "groovy"
+    if path.endswith(".kts"):
+        return "kotlin"
+    if path.endswith(".kt"):
+        return "kotlin"
+    if path.endswith(".swift"):
+        return "swift"
     return "text"
 
 
 def sanitize(source: str) -> str:
+    # Dart/JSON/YAML assignments using common secret names.
+    source = re.sub(
+        rf'(["\']?{SENSITIVE_NAME}["\']?\s*[:=]\s*)["\'][^"\']+["\']',
+        rf'\1"{REDACTED}"',
+        source,
+        flags=re.IGNORECASE,
+    )
+    # .properties and environment-style configuration files.
+    source = re.sub(
+        rf"(?im)^(\s*{SENSITIVE_NAME}\s*=\s*)[^\s#\r\n]+",
+        rf"\1{REDACTED}",
+        source,
+    )
+    # Android Manifest meta-data and Android/iOS XML string resources.
+    source = re.sub(
+        rf'(?is)(<meta-data\b(?=[^>]*\b(?:android:)?name\s*=\s*["\'][^"\']*{SENSITIVE_NAME}[^"\']*["\'])[^>]*\b(?:android:)?value\s*=\s*["\'])[^"\']+',
+        rf"\1{REDACTED}",
+        source,
+    )
+    source = re.sub(
+        rf'(?is)(<string\b[^>]*\bname\s*=\s*["\'][^"\']*{SENSITIVE_NAME}[^"\']*["\'][^>]*>)[^<]+',
+        rf"\1{REDACTED}",
+        source,
+    )
     source = re.sub(
         r"(api\s*=\s*)[\"'][A-Za-z0-9_\-]{20,}[\"']",
-        r'\1"API-KEY-KAMU"',
+        rf'\1"{REDACTED}"',
         source,
     )
     source = re.sub(
         r"([\"']x-api-key[\"']\s*:\s*)[\"'][^\"']+[\"']",
-        r"\1'API-KEY-KAMU'",
+        rf"\1'{REDACTED}'",
         source,
     )
     source = re.sub(
         r"([\"']key[\"']\s*:\s*)[\"'][A-Za-z0-9_\-]{16,}[\"']",
-        r"\1'API-KEY-KAMU'",
+        rf"\1'{REDACTED}'",
         source,
     )
     source = re.sub(
         r"(request\.headers\[[\"']x-api-key[\"']\]\s*=\s*)[\"'][^\"']+[\"']",
-        r"\1'API-KEY-KAMU'",
+        rf"\1'{REDACTED}'",
         source,
     )
     return source
@@ -99,6 +161,9 @@ def should_include(file: Path, module: Path) -> bool:
 
     if file.name == "pubspec.yaml":
         return True
+
+    if relative_parts[0] in NATIVE_ROOTS:
+        return file.suffix.lower() in NATIVE_SUFFIXES
 
     suffix = file.suffix.lower()
     if suffix not in {".dart", ".json", ".yaml", ".yml"}:
